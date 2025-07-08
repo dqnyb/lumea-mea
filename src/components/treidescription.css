@@ -1,0 +1,123 @@
+.trip-description {
+  width: 100%;
+  padding: 5vw 0;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.trip-description-container {
+  max-width: 90vw;
+  margin-left: 17vw;
+  box-sizing: border-box;
+}
+
+.trip-description-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 4vw;
+  font-weight: 700;
+  color: #00417A;
+  text-align: center;
+  margin: 0 0 2vw 0;
+  margin-left: -17vw;
+}
+
+.trip-description-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 2vw;
+  font-weight: 500;
+  color: #2C2C2C;
+  text-align: center;
+  margin: 0 0 5vw 0;
+  max-width: 70vw;
+  margin-right: auto;
+  margin-left: -2vw;
+}
+
+.trip-description-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 4vw;
+  margin-top: 3vw;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.trip-description-text-section {
+  flex: 1;
+  max-width: 40%;
+  box-sizing: border-box;
+}
+
+.trip-description-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.3vw;
+  font-weight: 400;
+  color: #2C2C2C;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.trip-description-image-section {
+  flex: 1;
+  max-width: 30%;
+  box-sizing: border-box;
+}
+
+.trip-description-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1vw;
+}
+
+@media (max-width: 768px) {
+  .trip-description-title {
+    font-size: 7vw;
+    text-align: center;
+    margin-left: -11vw;
+  }
+
+  .trip-description-description {
+    font-size: 5vw;
+    max-width: 90vw;
+    text-align: center;
+    margin: 0 auto 4vw auto;
+    margin-left: -11vw;
+  }
+
+  .trip-description-content {
+    flex-direction: column;
+    gap: 3vw;
+    align-items: center;
+  }
+
+  .trip-description-text-section,
+  .trip-description-image-section {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .trip-description-text {
+    font-size: 4vw;
+    text-align: center;
+    margin: 0 auto 3vw auto;
+    max-width: 90vw;
+    margin-left: -11vw;
+  }
+
+  .trip-description-image-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .trip-description-image {
+    width: 80vw;
+    max-width: 90vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-left: -6vw;
+  }
+}

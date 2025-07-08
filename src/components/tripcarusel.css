@@ -1,0 +1,141 @@
+.trip-carousel {
+  width: 100%;
+  padding: 3vw 0;
+  margin-left: 2vw;
+}
+
+.trip-carousel-content {
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+
+.trip-list {
+  display: flex;
+  gap: 3vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.trip-item {
+  flex: 1;
+  min-width: 22vw;
+  max-width: 25vw;
+}
+
+.trip-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-0.7vw);
+}
+
+.trip-card-image {
+  width: 20vw;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  position: relative;
+}
+
+.trip-card-overlay {
+  position: absolute;
+  top: 8vw;
+  left: 0;
+  width: 20vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2vw;
+  color: white;
+  text-align: center;
+}
+
+.trip-card-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2vw;
+  font-weight: 700;
+  margin: 0 0 0.7vw 0;
+}
+
+.trip-card-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 1vw;
+  font-weight: 300;
+  margin: 0 0 1.5vw 0;
+  line-height: 1.4;
+}
+
+.trip-card-price {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.4vw;
+  font-weight: 600;
+  margin: 0 0 1.5vw 0;
+  color: #ffffff;
+}
+
+.trip-card-button {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1vw;
+  font-weight: 500;
+  background-color: #00417A;
+  color: white;
+  border: none;
+  padding: 1vw 2vw;
+  border-radius: 0.7vw;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.trip-card-button:hover {
+  background-color: #003366;
+}
+
+@media (max-width: 768px) {
+  .trip-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 4vw;
+  }
+
+  .trip-item {
+    min-width: 70vw;
+    max-width: 80vw;
+  }
+
+  .trip-card-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .trip-card-overlay {
+    width: 100%;
+    top: 40vw;
+    padding: 2vw 0;
+  }
+
+  .trip-card-title {
+    font-size: 4vw;
+  }
+
+  .trip-card-description {
+    font-size: 2.5vw;
+    width: 90%;
+  }
+
+  .trip-card-price {
+    font-size: 3.5vw;
+  }
+
+  .trip-card-button {
+    font-size: 2.8vw;
+    padding: 2vw 4vw;
+  }
+}

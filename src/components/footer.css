@@ -1,0 +1,83 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00417A;
+  padding: 2vw 4vw;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-copyright p {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1vw;
+  font-weight: 400;
+  color: white;
+  margin: 0;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 3vw;
+  align-items: center;
+}
+
+.footer-nav-button {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1vw;
+  font-weight: 500;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0;
+  outline: none !important;
+}
+
+.footer-nav-button:hover {
+  color: #cccccc;
+}
+
+.footer-nav-button:focus,
+.footer-nav-button:focus-visible {
+  outline: none !important;
+  border: none !important;
+}
+
+.footer-top-button {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1vw;
+  font-weight: 500;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.8vw 1.5vw;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer-top-button:hover {
+  background-color: white;
+  color: #00417A;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 2vw;
+    padding: 4vw 2vw;
+  }
+  
+  .footer-nav {
+    gap: 4vw;
+  }
+  
+  .footer-copyright p,
+  .footer-nav-button,
+  .footer-top-button {
+    font-size: 3vw;
+  }
+}

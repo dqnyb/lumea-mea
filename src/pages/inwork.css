@@ -1,0 +1,97 @@
+.inwork-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #e0e7ef 0%, #f7fafc 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.inwork-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vw;
+}
+
+.inwork-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 6vw;
+  font-weight: 700;
+  color: #00417A;
+  margin: 2vw 0 1vw 0;
+  text-align: center;
+}
+
+.inwork-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 2.5vw;
+  color: #2C2C2C;
+  text-align: center;
+  margin-bottom: 4vw;
+}
+
+.inwork-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vw;
+}
+
+.gear {
+  width: 8vw;
+  height: 8vw;
+  border: 0.7vw solid #00417A;
+  border-radius: 50%;
+  border-top: 0.7vw solid #fff;
+  animation: spin 2s linear infinite;
+  margin: 0 2vw;
+  box-shadow: 0 4px 24px 0 rgba(0,65,122,0.15), 0 1.5vw 2vw rgba(0,65,122,0.08);
+  background: radial-gradient(circle at 60% 40%, #e0e7ef 60%, #b5c6d6 100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+}
+
+.gear2 {
+  width: 5vw;
+  height: 5vw;
+  border-width: 0.5vw;
+  border-top: 0.5vw solid #fff;
+  animation-direction: reverse;
+  background: radial-gradient(circle at 60% 40%, #f7fafc 60%, #c3d0e0 100%);
+}
+
+.inwork-animation:hover .gear,
+.inwork-animation:hover .gear2 {
+  transform: scale(1.08) rotate(10deg);
+  box-shadow: 0 8px 32px 0 rgba(0,65,122,0.25), 0 2vw 4vw rgba(0,65,122,0.12);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+@media (max-width: 768px) {
+  .inwork-title {
+    font-size: 10vw;
+  }
+  .inwork-description {
+    font-size: 5vw;
+  }
+  .gear {
+    width: 18vw;
+    height: 18vw;
+    border-width: 2vw;
+    border-top: 2vw solid #fff;
+  }
+  .gear2 {
+    width: 10vw;
+    height: 10vw;
+    border-width: 1vw;
+    border-top: 1vw solid #fff;
+  }
+}

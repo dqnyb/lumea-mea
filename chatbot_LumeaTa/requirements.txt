@@ -1,0 +1,12 @@
+flask
+flask-cors
+python-dotenv
+openai
+langchain
+langchain-experimental
+pandas
+requests
+rapidfuzz
+thefuzz
+word2number
+dotenv

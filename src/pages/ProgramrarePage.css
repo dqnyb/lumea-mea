@@ -1,0 +1,263 @@
+.programrare-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.programrare-page-mainbg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.programrare-page-secondbg {
+  position: absolute;
+  display: block;
+  width: 100vw;
+  margin-top: 0vw;
+  z-index: 100;
+}
+
+.programrare-page-title {
+  position: absolute;
+  top: 12vw;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  font-family: "Raleway", sans-serif;
+  font-size: 5vw;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0;
+  z-index: 1;
+}
+.programrare-page-fog-overlay {
+  position: absolute;
+  top: 0 ;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.3) 70%,
+    rgba(255, 255, 255, 0.7) 85%,
+    rgba(255, 255, 255, 0.9) 95%,
+    white 100%
+  );
+  z-index: 200;
+  pointer-events: none;
+}
+
+.programrare-page-title-ru{
+  position: absolute;
+  top: 12vw;
+  left: 58%;
+  transform: translate(-50%, -50%);
+  font-family: "Raleway", sans-serif;
+  font-size: 5vw;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0;
+  z-index: 1;
+}
+
+.programrare-page-list {
+  position: relative;
+  z-index: 300;
+  margin-top: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: -2vw; /* Made gap smaller */
+  width: 100%;
+  top: -28vw;
+  left: 1vw;
+}
+
+.programrare-page-list-item {
+  margin-right: -4vw;
+  flex: 1;
+  min-width: 20vw;
+  max-width: 25vw;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.programrare-page-list-item:hover {
+  transform: translateY(-0.7vw);
+}
+
+.programrare-page-list-item-img {
+  width: 18vw;
+  object-fit: cover;
+  display: block;
+  position: relative;
+}
+
+.programrare-page-list-item-title,
+.programrare-page-list-item-description,
+.programrare-page-list-item-price,
+.programrare-page-list-item-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  width: 100%; 
+  padding: 0 1vw;
+  top: 20vw;
+}
+
+.programrare-page-list-item-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.3vw;
+  font-weight: 700;
+  margin: 0;
+  width: 20vw;
+  margin-left: -3.3vw;
+  top: 18vw; 
+}
+
+.programrare-page-list-item-description {
+  top: 22vw;
+  font-family: "Manrope", sans-serif;
+  font-size: 1vw;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.2;
+  margin-left: -3.3vw;
+  width: 20vw;
+}
+
+.programrare-page-list-item-price {
+  top: 24.5vw;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.4vw;
+  font-weight: 600;
+  margin: 0;
+  margin-left: -3.3vw;
+}
+
+.programrare-page-list-item-button {
+  width: 10vw;
+  margin-left: -3.3vw;
+  top: 27vw;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9vw;
+  font-weight: 500;
+  background-color: #00417A;
+  color: white;
+  border: none;
+  padding: 1vw 2vw;
+  border-radius: 0.7vw;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.programrare-page-list-item-button:hover {
+  background-color: #003366;
+}
+
+.programrare-page-footer {
+    position: relative;
+    margin-top: -15vw;
+}
+
+@media (max-width: 768px) {
+
+  .programrare-page-title {
+  font-size: 8vw;
+  left:65vw;
+}
+
+  .programrare-page-secondbg {
+    display: none;
+  }
+  .programrare-page-list {
+    top: 80vw;
+    flex-direction: column;
+    gap: 8vw;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .programrare-page-list-item {
+    min-width: 80vw;
+    max-width: 90vw;
+    width: 90vw;
+    margin: 0 auto 6vw auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .programrare-page-list-item-img {
+    width: 80vw;
+    height: auto;
+    display: block;
+  }
+
+  .programrare-page-list-item-title,
+  .programrare-page-list-item-description,
+  .programrare-page-list-item-price,
+  .programrare-page-list-item-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+    color: white;
+    z-index: 2;
+    padding: 2vw 1vw;
+    border-radius: 2vw;
+    margin-left: 1vw;
+  }
+
+  .programrare-page-list-item-title {
+    font-size: 6vw;
+    font-weight: 700;
+    margin-bottom: 2vw;
+    margin-top: 15vw;
+  }
+  .programrare-page-list-item-description {
+    font-size: 4vw;
+    margin-top: 30vw;
+    margin-bottom: 2vw;
+  }
+  .programrare-page-list-item-price {
+    font-size: 5vw;
+    margin-bottom: 2vw;
+    margin-top: 40vw;
+  }
+  .programrare-page-list-item-button {
+    font-size: 4vw;
+    padding: 2vw 6vw;
+    border-radius: 2vw;
+    margin-top: 2vw;
+    background: #00417A;
+    color: #fff;
+    border: none;
+    margin-top: 50vw;
+    width: 70vw;
+  }
+  .programrare-page-footer {
+    margin-top: 80vw;
+  }
+}

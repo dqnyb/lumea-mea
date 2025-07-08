@@ -1,0 +1,40 @@
+{
+  "ro": {
+    "homepage": {
+      "title": "Viața este o aventură. Alege-ți drumul!",
+      "description": "Cu noi, fiecare călătorie devine o oportunitate de a descoperi lumea, pe tine însuți și noi orizonturi.",
+      "button": "Despre noi",
+      "trip": "Tururi",
+      "tripButton": "Rezervă-ți locul",
+      "tripDescription": "Făcând clic pe buton, îți dai consimțământul pentru prelucrarea datelor personale și ești de acord cu politica de confidențialitate.",
+      "whyus":"Dece sa calătorești cu noi?",
+      "gallery":"Galerie" 
+    },
+     "aboutus":{
+      "title": "Despre Noi",
+      "description": "Lumea Ta este mai mult decât o agenție de turism – este o comunitate de oameni pasionați de natură, mișcare și explorare autentică. Oferim experiențe personalizate de trekking, hiking, expediții, tururi tematice, ciclism montan, retreaturi și programe pentru familii sau grupuri corporate. Suntem ghizi licențiați, cu expertiză montană și logistică solidă, care pun pe primul loc siguranța, profesionalismul și conexiunea autentică cu natura. Fiecare tur este gândit cu grijă – de la alegerea traseului și a locurilor de cazare, până la micile detalii care transformă o simplă drumeție într-o amintire de neuitat.",
+      "icon1": "Sigur",
+      "icon2": "Rapid",
+      "icon3": "Ieftin"
+    }
+  },
+  "ru": {
+    "homepage": {
+      "title": "Жизнь — это<br> приключение.<br>Выбирайте свой <br>путь!",
+      "description": "С нами каждое путешествие становится возможностью открыть мир, себя и новые горизонты.",
+      "button": "О нас",
+      "trip": "Туры",
+      "tripButton": "Забронировать место",
+      "tripDescription": "Нажимая кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности.",
+      "whyus":"Почему стоит путешествовать с нами?",
+      "gallery":"Галерея" 
+    },
+    "aboutus":{
+      "title": "О нас",
+      "description": "Your World — это больше, чем туристическое агентство, это сообщество людей, увлеченных природой, движением и подлинными исследованиями. Мы предлагаем персонализированные треккинги, походы, экспедиции, тематические туры, катание на горных велосипедах, ретриты и программы для семей или корпоративных групп.<br>Мы лицензированные гиды с солидным опытом работы в горах и логистике, которые ставят безопасность, профессионализм и подлинную связь с природой на первое место. Каждый тур тщательно продуман — от выбора маршрута и размещения до мелких деталей, которые превращают простой поход в незабываемое воспоминание.",
+      "icon1": "Безопасно",
+      "icon2": "Быстро",
+      "icon3": "Дешёво"
+    }
+  }
+}

@@ -1,0 +1,183 @@
+.timer {
+  position: relative;
+  width: 100%;
+  height: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 5vw 0;
+}
+
+.timer-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.timer-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 5vw;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 2vw 0;
+  z-index: 2;
+}
+
+.timer-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5vw;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  margin: 0 0 2vw 0;
+  max-width: 60vw;
+  line-height: 1.6;
+  z-index: 2;
+}
+
+.timer-date {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.3vw;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: rgba(0, 65, 122, 0.8);
+  padding: 1vw 2vw;
+  border-radius: 0.5vw;
+  margin: 0 0 3vw 0;
+  z-index: 2;
+}
+
+.timer-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.timer-button-1,
+.timer-button-2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.2vw;
+  font-weight: 500;
+  background-color: #00417A;
+  color: white;
+  border: none;
+  padding: 1.2vw 3vw;
+  border-radius: 0.7vw;
+  cursor: pointer;
+  margin: 0;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+}
+
+.timer-button-1:hover,
+.timer-button-2:hover {
+  background-color: #003366;
+}
+
+.timer-button-2 {
+  background-color: white;
+  border: 0.2vw solid white;
+  color: #00417A;
+}
+
+.timer-button-2:hover {
+  background-color: transparent;
+  color: #f7f7f7;
+}
+
+.timer-countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  margin: 0 0 3vw 0;
+  z-index: 2;
+}
+
+.timer-countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vw;
+}
+
+.timer-countdown-number {
+  font-family: "Raleway", sans-serif;
+  font-size: 7vw;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.timer-countdown-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 1vw;
+  font-weight: 400;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+}
+
+.timer-countdown-divider {
+  font-family: "Raleway", sans-serif;
+  font-size: 6.5vw;
+  font-weight: 300;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+  .timer {
+    height: 60vw;
+  }
+  
+  .timer-title {
+    font-size: 7vw;
+    margin-bottom: 3vw;
+  }
+  
+  .timer-description {
+    font-size: 3vw;
+    max-width: 80vw;
+    margin-bottom: 3vw;
+  }
+  
+  .timer-date {
+    font-size: 3vw;
+    padding: 2vw 3vw;
+    margin-bottom: 4vw;
+  }
+  
+  .timer-button-1,
+  .timer-button-2 {
+    font-size: 3vw;
+    padding: 3vw 5vw;
+    margin: 1vw;
+  }
+  
+  .timer-countdown {
+    gap: 3vw;
+  }
+  
+  .timer-countdown-number {
+    font-size: 5vw;
+  }
+  
+  .timer-countdown-label {
+    font-size: 2.5vw;
+  }
+  
+  .timer-countdown-divider {
+    font-size: 4vw;
+  }
+}
