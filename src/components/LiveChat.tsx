@@ -129,7 +129,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendChatRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/chat", {
+    return fetch("http://lumea-mea.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg }),
@@ -383,7 +383,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
       setVisible(true);
       if (messages.length === 0 && onboardingStep === 0) {
         setLoading(true);
-        fetch("https://lumea-ta-finished.onrender.com/language")
+        fetch("https://lumea-mea.onrender.com/language")
           .then((res) => res.json())
           .then((data) => {
             // window.language = data.language || "RO";
