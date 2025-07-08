@@ -39,7 +39,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
 
 
   const sendStartRequest = (name: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/start", {
+    return fetch("https://lumea-mea.onrender.com/start", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
@@ -60,7 +60,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendInterestsRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/interests", {
+    return fetch("https://lumea-mea.onrender.com/interests", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: userName, message: msg, language: window.language }),
@@ -105,7 +105,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
 
 
   const sendPlanificareRequest = (interests: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/planificare", {
+    return fetch("https://lumea-mea.onrender.com/planificare", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -129,7 +129,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendChatRequest = (msg: string) => {
-    return fetch("http://lumea-mea.onrender.com/chat", {
+    return fetch("https://lumea-mea.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg }),
@@ -146,7 +146,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendDurataRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/durata", {
+    return fetch("https://lumea-mea.onrender.com/durata", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, language: window.language }),
@@ -166,7 +166,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendDificultateRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/dificultate", {
+    return fetch("https://lumea-mea.onrender.com/dificultate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, language: window.language }),
@@ -195,7 +195,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendBugetRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/buget", {
+    return fetch("https://lumea-mea.onrender.com/buget", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, language: window.language }),
@@ -215,7 +215,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendChatAdvancedRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/chat", {
+    return fetch("https://lumea-mea.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: userName, message: msg, language: window.language }),
@@ -242,7 +242,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
 
   const sendExempleRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/exemple", {
+    return fetch("https://lumea-mea.onrender.com/exemple", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, language: window.language }),
@@ -266,7 +266,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
 
   const sendSimpleChatRequest = async (msg: string) => {
     try {
-      const res = await fetch("https://lumea-ta-finished.onrender.com/simple_chat", {
+      const res = await fetch("https://lumea-mea.onrender.com/simple_chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: msg, language: window.language }),
@@ -293,7 +293,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   };
   
   const sendReturnMessageRequest = (msg: string) => {
-    return fetch("https://lumea-ta-finished.onrender.com/return_message", {
+    return fetch("https://lumea-mea.onrender.com/return_message", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: msg, language: window.language }),
