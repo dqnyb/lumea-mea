@@ -314,9 +314,23 @@ def check_region(user_response: str) -> str:
         "toate": ["toate", "все", "все регионы", "все направления", "toate optiunile", "toate opțiunile"]
     }
 
+    invalid_regions = {
+        "europa": ["europa", "европа", "европу", "европаа"],
+        "turcia": ["turcia", "турция", "турцию", "турка"]
+    }
+
+
     user_text = user_response.lower()
     words = user_text.split()
 
+    for aliases in invalid_regions.values():
+        for alias in aliases:
+            if fuzz.partial_ratio(alias.lower(), user_text) >= 70:
+                return "NU E DISPONIBIL"
+            for word in words:
+                if fuzz.partial_ratio(alias.lower(), word) >= 70:
+                    return "NU E DISPONIBIL"
+                
     for region_key, aliases in target_regions.items():
         for alias in aliases:
             alias_lower = alias.lower()
@@ -330,9 +344,14 @@ def check_region(user_response: str) -> str:
                 if fuzz.partial_ratio(alias_lower, word) >= 70:
                     return "DA"
 
+
+    print("ACUM DEPINDE DE PROMPT ---- ")
     prompt = (
         f'Utilizatorul a răspuns: "{user_response}".\n'
-        "Verifică dacă răspunsul conține clar doar una dintre regiunile: România (Румыния) sau Toate (все регионы / все направления).\n"
+        "Verifică dacă răspunsul conține clar DOAR una dintre următoarele alegeri valide: România (Румыния) sau Toate (все регионы / все направления).\n"
+        "Prin 'Toate' se înțelege că utilizatorul alege în mod explicit toate opțiunile turistice disponibile, ca alternativă la alegerea unei singure regiuni. "
+        "Nu considera valid doar dacă apare cuvântul 'toate' într-un alt context fără legătură clară cu opțiunile turistice.\n"
+        "Dacă utilizatorul alege orice altă regiune (precum Europa, Turcia sau altă țară), atunci NU este valid — returnează NU E DISPONIBIL.\n"
         "Acceptă formulări în română sau rusă, cu sau fără diacritice, majuscule/minuscule, sinonime sau expresii echivalente.\n"
         "Acceptă și greșeli de tastare sau forme aproximative, dacă cel puțin 70% din cuvânt seamănă clar cu numele unei regiuni și sensul este evident.\n"
         "\n"
@@ -381,7 +400,7 @@ def check_region(user_response: str) -> str:
     try:
         answer = chat_with_openai(messages, temperature=0, max_tokens=20)
         answer = answer.strip().upper()
-
+        print(f"acestea este answerul promptului = {answer}")
         if answer == "VALID":
             return "DA"
         elif answer == "NU E DISPONIBIL":
@@ -568,7 +587,7 @@ def planificare():
             log_message("ПОЛЬЗОВАТЕЛЬ", f"Ответ, связанный с регионом: {response}")
 
         preferinte["regiune"] = response
-    elif check_region(response) in ["IN PROGRES", "Inca nu e disponibila tara"]:
+    elif check_region(response) in ["IN PROGRES", "Inca nu e disponibila tara"] or check_region(response) == "NU E DISPONIBIL" :
             if language == "RO":
                 log_message("USER", response)
                 messages = [
