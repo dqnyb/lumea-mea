@@ -325,32 +325,36 @@ def check_region(user_response: str) -> str:
 
     for aliases in invalid_regions.values():
         for alias in aliases:
-            if fuzz.partial_ratio(alias.lower(), user_text) >= 70:
+            if fuzz.partial_ratio(alias.lower(), user_text) >= 85:
+                print("NU E DISPONIBIL")
                 return "NU E DISPONIBIL"
             for word in words:
-                if fuzz.partial_ratio(alias.lower(), word) >= 70:
+                if fuzz.partial_ratio(alias.lower(), word) >= 85:
+                    print("NU E DISPONIBIL")
                     return "NU E DISPONIBIL"
-                
+    
+    
     for region_key, aliases in target_regions.items():
         for alias in aliases:
             alias_lower = alias.lower()
 
             # Verificare pe întregul text
-            if fuzz.partial_ratio(alias_lower, user_text) >= 70:
+            if fuzz.partial_ratio(alias_lower, user_text) >= 85:
+                print("DA")
                 return "DA"
 
             # Verificare pe fiecare cuvânt
             for word in words:
-                if fuzz.partial_ratio(alias_lower, word) >= 70:
+                if fuzz.partial_ratio(alias_lower, word) >= 85:
+                    print("DA")
                     return "DA"
 
 
     print("ACUM DEPINDE DE PROMPT ---- ")
+
     prompt = (
         f'Utilizatorul a răspuns: "{user_response}".\n'
-        "Verifică dacă răspunsul conține clar DOAR una dintre următoarele alegeri valide: România (Румыния) sau Toate (все регионы / все направления).\n"
-        "Prin 'Toate' se înțelege că utilizatorul alege în mod explicit toate opțiunile turistice disponibile, ca alternativă la alegerea unei singure regiuni. "
-        "Nu considera valid doar dacă apare cuvântul 'toate' într-un alt context fără legătură clară cu opțiunile turistice.\n"
+        "Verifică dacă răspunsul conține clar DOAR una dintre următoarele alegeri valide: România (Румыния) \n"
         "Dacă utilizatorul alege orice altă regiune (precum Europa, Turcia sau altă țară), atunci NU este valid — returnează NU E DISPONIBIL.\n"
         "Acceptă formulări în română sau rusă, cu sau fără diacritice, majuscule/minuscule, sinonime sau expresii echivalente.\n"
         "Acceptă și greșeli de tastare sau forme aproximative, dacă cel puțin 70% din cuvânt seamănă clar cu numele unei regiuni și sensul este evident.\n"
@@ -359,11 +363,6 @@ def check_region(user_response: str) -> str:
         "- „vreau să merg în România”\n"
         "- „rumunia” (greșit scris, dar clar înțeles)\n"
         "- „в Румынию”\n"
-        "- „toate opțiunile”\n"
-        "- „oriunde e disponibil”\n"
-        "- „все регионы”\n"
-        "- „все направления”\n"
-        "- „toate destinațiile”\n"
         "\n"
         "Exemple cu altă regiune decât România sau Toate (răspunde cu NU E DISPONIBIL):\n"
         "- „Europa”\n"
@@ -384,7 +383,7 @@ def check_region(user_response: str) -> str:
         "- „unde e cald”\n"
         "\n"
         "Răspunde STRICT cu:\n"
-        "- VALID — dacă este clar că utilizatorul a menționat sau a vrut să menționeze România sau Toate (chiar și cu greșeli evidente).\n"
+        "- VALID — dacă este clar că utilizatorul a menționat sau a vrut să menționeze România , VALID este doar legat de Romania\n"
         "- NU E DISPONIBIL — dacă a fost menționată clar altă regiune decât România sau Toate.\n"
         "- INVALID — dacă nu e clar deloc la ce se referă utilizatorul sau nu are legătură cu nicio regiune.\n"
         "\n"
@@ -579,6 +578,7 @@ def planificare():
     user_data = request.get_json()
     response = user_data.get("interests", "prieten")
     language = user_data.get("language", "RO")  # implicit română
+    print("response = ",check_region(response))
 
     if check_region(response) == "DA":
         if language == "RO":
@@ -587,6 +587,7 @@ def planificare():
             log_message("ПОЛЬЗОВАТЕЛЬ", f"Ответ, связанный с регионом: {response}")
 
         preferinte["regiune"] = response
+    
     elif check_region(response) in ["IN PROGRES", "Inca nu e disponibila tara"] or check_region(response) == "NU E DISPONIBIL" :
             if language == "RO":
                 log_message("USER", response)
@@ -624,7 +625,7 @@ def planificare():
                 ]
 
             gpt_response = chat_with_openai(messages, temperature=0.5, max_tokens=150)
-            gpt_response += " ! ! !"
+            gpt_response += "!!!!"
 
             return jsonify({"question": gpt_response.strip()})
 
@@ -1832,16 +1833,9 @@ def return_message():
     return jsonify({"reply": reply})
 
 
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, "index.html")
 
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port,debug=True, use_reloader=False)
+
+    app.run(debug=True, use_reloader=False)

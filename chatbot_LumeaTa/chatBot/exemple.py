@@ -458,7 +458,6 @@ def create_preferinte_text(preferinte):
     preferinte_text = (
         f"Regiune: {preferinte['regiune']}\n"
         f"Anotimp: {preferinte['anotimp']}\n"
-
         f"Durata maximă: {preferinte['durata_max']} zile\n"
         f"Dificultate: {preferinte['dificultate']}\n"
         f"Buget: {preferinte['buget']} euro\n"

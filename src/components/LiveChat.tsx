@@ -119,8 +119,9 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
         const replyText = data.question || "Răspuns necunoscut.";
         const botMsg: ChatMessage = { id: Date.now(), text: replyText, from: "bot" };
         setMessages((prev) => [...prev, botMsg]);
-        if(replyText.includes(" ! ! !")){
-          setOnboardingStep(2)
+        if(replyText.includes("!!!!")){
+          setOnboardingStep(2);
+          return;
         }
         if (replyText.includes("Europa, Turcia") || replyText.includes("Европа, Турция")) {
           setOnboardingStep(2);
