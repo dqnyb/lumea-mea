@@ -591,24 +591,36 @@ def planificare():
             if language == "RO":
                 log_message("USER", response)
                 messages = [
-                    {"role": "system", "content": "Ești un asistent politicos și prietenos, care oferă explicații clare și utile."},
-                    {"role": "user", "content": (
-                        f"Utilizatorul a răspuns: '{response}'. "
-                        "Explică-i într-un mod foarte prietenos și politicos că momentan acea destinație nu este disponibilă, deoarece se fac lucrări pe site sau încă nu am lansat opțiunile respective. "
-                        "Spune-i că în prezent este disponibilă doar opțiunea România pentru selecție și roagă-l să confirme dacă dorește să continue cu aceasta. "
-                        "Mesajul trebuie să fie clar, scurt și să nu depășească 100 de tokenuri. Evită orice răspuns legat de cine ești tu sau cum funcționezi."
-                    )}
+                    {
+                        "role": "system",
+                        "content": "Ești un asistent politicos și prietenos, care oferă explicații clare și utile."
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Utilizatorul a răspuns: '{response}'. "
+                            "Oferă un mesaj prietenos și politicos (fără salut), în care să explici că acea destinație nu este disponibilă momentan, din cauza lucrărilor pe site sau pentru că opțiunea nu a fost încă lansată. "
+                            "Spune clar că în prezent este disponibilă doar opțiunea România. Roagă utilizatorul să scrie 'România' dacă dorește să continue cu această variantă. "
+                            "Mesajul trebuie să fie scurt, clar și să nu depășească 100 de tokenuri. Nu menționa nimic despre cine ești sau cum funcționezi."
+                        )
+                    }
                 ]
             else:
                 log_message("ПОЛЬЗОВАТЕЛЬ", response)
                 messages = [
-                    {"role": "system", "content": "Ты вежливый и доброжелательный помощник, который отвечает ясно и коротко."},
-                    {"role": "user", "content": (
-                        f"Пользователь ответил: '{response}'. "
-                        "Объясни в очень дружелюбной и вежливой форме, что выбранное направление пока недоступно, так как на сайте проводятся обновления или это направление ещё не запущено. "
-                        "Скажи, что сейчас доступна только опция «Румыния» и попроси подтвердить, хочет ли пользователь продолжить с этим вариантом. "
-                        "Ответ должен быть чётким, дружелюбным и не превышать 100 токенов. Не упоминай ничего о себе, о своём происхождении или технологиях."
-                    )}
+                    {
+                        "role": "system",
+                        "content": "Ты вежливый и доброжелательный помощник, который отвечает ясно и коротко."
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Пользователь ответил: '{response}'. "
+                            "Дай дружелюбный и вежливый ответ (без приветствия), объяснив, что это направление пока недоступно из-за обновлений сайта или того, что оно ещё не запущено. "
+                            "Укажи, что сейчас доступен только вариант «Румыния». Попроси пользователя написать «Румыния», если он хочет продолжить с этим направлением. "
+                            "Ответ должен быть коротким, чётким и не превышать 100 токенов. Не упоминай ничего о себе, происхождении или технологиях."
+                        )
+                    }
                 ]
 
             gpt_response = chat_with_openai(messages, temperature=0.5, max_tokens=150)
