@@ -473,7 +473,7 @@ df.columns = df.columns.str.strip()
 df_ro = df[df["Limba"].str.strip().str.lower() == "ro"]
 
 def read_csv(language):
-    df = pd.read_csv("tururi-3.csv", header=1)
+    df = pd.read_csv("chatbot_LumeaTa/chatBot/tururi-3.csv", header=1)
     df.columns = df.columns.str.strip()
     if language == "RO":
         df_lan = df[df["Limba"].str.strip().str.lower() == "ro"]
