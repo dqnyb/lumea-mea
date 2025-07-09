@@ -309,52 +309,68 @@ def generate_ask_interests_message(question, options, language_saved):
 def check_region(user_response: str) -> str:
     target_regions = {
         "romania": ["romania", "rumunia", "румыния", "румынию"],
-        "europa": ["europa", "европа", "европу", "европаа"],
-        "turcia": ["turcia", "турция", "турцию", "турка"],
+        # "europa": ["europa", "европа", "европу", "европаа"],
+        # "turcia": ["turcia", "турция", "турцию", "турка"],
         "toate": ["toate", "все", "все регионы", "все направления", "toate optiunile", "toate opțiunile"]
     }
 
     user_text = user_response.lower()
+    words = user_text.split()
 
     for region_key, aliases in target_regions.items():
         for alias in aliases:
-            score = fuzz.partial_ratio(alias.lower(), user_text)
-            if score >= 70:
+            alias_lower = alias.lower()
+
+            # Verificare pe întregul text
+            if fuzz.partial_ratio(alias_lower, user_text) >= 70:
                 return "DA"
-            
+
+            # Verificare pe fiecare cuvânt
+            for word in words:
+                if fuzz.partial_ratio(alias_lower, word) >= 70:
+                    return "DA"
+
     prompt = (
         f'Utilizatorul a răspuns: "{user_response}".\n'
-        "Verifică dacă răspunsul conține clar una dintre regiunile: România (Румыния), Europa (Европа), Turcia (Турция) sau Toate (все регионы / все направления).\n"
+        "Verifică dacă răspunsul conține clar doar una dintre regiunile: România (Румыния) sau Toate (все регионы / все направления).\n"
         "Acceptă formulări în română sau rusă, cu sau fără diacritice, majuscule/minuscule, sinonime sau expresii echivalente.\n"
         "Acceptă și greșeli de tastare sau forme aproximative, dacă cel puțin 70% din cuvânt seamănă clar cu numele unei regiuni și sensul este evident.\n"
         "\n"
-        "Exemple acceptate:\n"
-        "- „vreau să merg în Europa”\n"
-        "- „doresc un tur în România”\n"
-        "- „toate opțiunile”\n"
-        "- „oriunde în Turcia”\n"
+        "Exemple ACCEPTATE (răspunde cu VALID):\n"
+        "- „vreau să merg în România”\n"
+        "- „rumunia” (greșit scris, dar clar înțeles)\n"
         "- „в Румынию”\n"
-        "- „поехать в Европу”\n"
-        "- „в Турцию с семьей”\n"
+        "- „toate opțiunile”\n"
+        "- „oriunde e disponibil”\n"
         "- „все регионы”\n"
         "- „все направления”\n"
-        "- „rumunia” (greșit scris dar înțeles)\n"
-        "- „turca” (greșit scris dar clar indică Turcia)\n"
-        "- „европаа” (cu o literă în plus, dar evident)\n"
+        "- „toate destinațiile”\n"
         "\n"
-        "Exemple respinse:\n"
+        "Exemple cu altă regiune decât România sau Toate (răspunde cu NU E DISPONIBIL):\n"
+        "- „Europa”\n"
+        "- „Turcia”\n"
+        "- „в Европу”\n"
+        "- „поехать в Турцию”\n"
+        "- „турка”\n"
+        "- „европа”\n"
+        "\n"
+        "Exemple RESPINSE complet (răspunde cu INVALID):\n"
         "- „Asia”\n"
         "- „Undeva în vest”\n"
         "- „Olanda”\n"
         "- „в Таиланд”\n"
+        "- „nu știu”\n"
+        "- „alege tu”\n"
+        "- „nu contează”\n"
+        "- „unde e cald”\n"
         "\n"
         "Răspunde STRICT cu:\n"
-        "- VALID — dacă este clar că utilizatorul a menționat sau a vrut să menționeze una dintre regiunile cerute (chiar și cu greșeli evidente).\n"
-        "- INVALID — în orice alt caz.\n"
+        "- VALID — dacă este clar că utilizatorul a menționat sau a vrut să menționeze România sau Toate (chiar și cu greșeli evidente).\n"
+        "- NU E DISPONIBIL — dacă a fost menționată clar altă regiune decât România sau Toate.\n"
+        "- INVALID — dacă nu e clar deloc la ce se referă utilizatorul sau nu are legătură cu nicio regiune.\n"
         "\n"
-        "Răspunde doar cu VALID sau INVALID."
+        "Răspunde doar cu VALID, NU E DISPONIBIL sau INVALID."
     )
-
 
 
     messages = [
@@ -363,11 +379,13 @@ def check_region(user_response: str) -> str:
     ]
 
     try:
-        answer = chat_with_openai(messages, temperature=0, max_tokens=3)
+        answer = chat_with_openai(messages, temperature=0, max_tokens=20)
         answer = answer.strip().upper()
 
         if answer == "VALID":
             return "DA"
+        elif answer == "NU E DISPONIBIL":
+            return "Inca nu e disponibila tara ( IN PROGRES ) ! Te rog să alegi din urmatoaterele tari disponibile : România"
         else:
             return "Te rog să alegi o regiune validă: România, Europa, Turcia sau Toate."
     except Exception as e:
@@ -550,6 +568,36 @@ def planificare():
             log_message("ПОЛЬЗОВАТЕЛЬ", f"Ответ, связанный с регионом: {response}")
 
         preferinte["regiune"] = response
+    elif check_region(response) in ["IN PROGRES", "Inca nu e disponibila tara"]:
+            if language == "RO":
+                log_message("USER", response)
+                messages = [
+                    {"role": "system", "content": "Ești un asistent politicos și prietenos, care oferă explicații clare și utile."},
+                    {"role": "user", "content": (
+                        f"Utilizatorul a răspuns: '{response}'. "
+                        "Explică-i într-un mod foarte prietenos și politicos că momentan acea destinație nu este disponibilă, deoarece se fac lucrări pe site sau încă nu am lansat opțiunile respective. "
+                        "Spune-i că în prezent este disponibilă doar opțiunea România pentru selecție și roagă-l să confirme dacă dorește să continue cu aceasta. "
+                        "Mesajul trebuie să fie clar, scurt și să nu depășească 100 de tokenuri. Evită orice răspuns legat de cine ești tu sau cum funcționezi."
+                    )}
+                ]
+            else:
+                log_message("ПОЛЬЗОВАТЕЛЬ", response)
+                messages = [
+                    {"role": "system", "content": "Ты вежливый и доброжелательный помощник, который отвечает ясно и коротко."},
+                    {"role": "user", "content": (
+                        f"Пользователь ответил: '{response}'. "
+                        "Объясни в очень дружелюбной и вежливой форме, что выбранное направление пока недоступно, так как на сайте проводятся обновления или это направление ещё не запущено. "
+                        "Скажи, что сейчас доступна только опция «Румыния» и попроси подтвердить, хочет ли пользователь продолжить с этим вариантом. "
+                        "Ответ должен быть чётким, дружелюбным и не превышать 100 токенов. Не упоминай ничего о себе, о своём происхождении или технологиях."
+                    )}
+                ]
+
+            gpt_response = chat_with_openai(messages, temperature=0.5, max_tokens=150)
+            gpt_response += " ! ! !"
+
+            return jsonify({"question": gpt_response.strip()})
+
+
     else:
         if language == "RU":
             log_message("ПОЛЬЗОВАТЕЛЬ" , response)
