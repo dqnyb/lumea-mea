@@ -412,6 +412,11 @@ def check_region(user_response: str) -> str:
 
 
 def check_duration_ai(user_response: str) -> str:
+
+    match = re.search(r'\d+', user_response)
+    if match:
+        return match.group(0)  # returnează primul număr găsit (ca string)
+
     prompt = (
         f"Utilizatorul a spus: \"{user_response}\".\n\n"
         "Încearcă să interpretezi durata călătoriei chiar dacă este exprimată vag sau în limbaj natural, "
@@ -1797,9 +1802,15 @@ def return_message():
 
     if status != "VALID":
         if language == "RO":
-            reply = "Numărul introdus nu este valid. Te rog să scrii din nou numarul."
+            reply = (
+                "Numărul introdus nu este valid. 📵\n<br>"
+                "Te rog să scrii din nou numărul de telefon, începând cu `0` sau `+373`. 📱"
+            )
         else:
-            reply = "Введённый номер недействителен. Пожалуйста, введите заново номер."
+            reply = (
+                "Введённый номер недействителен. 📵\n<br>"
+                "Пожалуйста, введите номер телефона снова, начиная с `0` или `+373`. 📱"
+            )
 
         # La încercările următoare (count > 0), poți concatena mesajele dacă vrei
         if counter["count"] > 0:
