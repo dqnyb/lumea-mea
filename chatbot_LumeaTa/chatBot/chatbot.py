@@ -325,11 +325,11 @@ def check_region(user_response: str) -> str:
 
     for aliases in invalid_regions.values():
         for alias in aliases:
-            if fuzz.partial_ratio(alias.lower(), user_text) >= 85:
+            if fuzz.partial_ratio(alias.lower(), user_text) >= 70:
                 print("NU E DISPONIBIL")
                 return "NU E DISPONIBIL"
             for word in words:
-                if fuzz.partial_ratio(alias.lower(), word) >= 85:
+                if fuzz.partial_ratio(alias.lower(), word) >= 70:
                     print("NU E DISPONIBIL")
                     return "NU E DISPONIBIL"
     
