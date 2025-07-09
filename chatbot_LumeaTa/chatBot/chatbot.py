@@ -1700,12 +1700,14 @@ def extrage_si_valideaza_numar(text):
             return nr , "VALID"
     return nr , "INVALID"
 
-counter = {}
-counter["count"] = 0
+
+counter = {"count": 0}
+saved = {"mesaj": "", "numar": ""}
 
 @app.route("/return_message", methods=["POST"])
 def return_message():
-    global counter
+    global counter, saved
+
     data = request.get_json()
     message = data.get("message", "")
     language = data.get("language", "RO")
@@ -1713,85 +1715,34 @@ def return_message():
     for key, value in preferinte.items():
         message += f"\n{key.capitalize()}: {value}"
 
-    prompt = f"""
-    Ești un asistent inteligent care primește un mesaj de la un utilizator.
-    Mesajul conține posibil informații personale precum nume, prenume, interes sau număr de telefon.
-
-    Scopul tău este să răspunzi cu:
-    - `DA` dacă mesajul pare a fi o completare serioasă a datelor cerute (ex. nume complet, interes exprimat clar, telefon).
-    - `NU` dacă mesajul este vag, incomplet sau neserios (ex: „da”, „salut”, „ok”, „nu știu”, „vreau tur”).
-
-    Mesajul utilizatorului este:
-
-    \"\"\"{message}\"\"\"
-
-    Răspunde strict cu `DA` sau `NU`. Nu adăuga explicații.
-    """
-
-
-    messages = [
-        {"role": "system", "content": prompt},
-    ]
-
-    response = chat_with_openai(messages)
-
-    if response == "NU":
-        prompt = f"""
-        Ești un asistent virtual inteligent și prietenos.
-
-        Ai primit următorul mesaj de la un utilizator:
-
-        \"\"\"{message}\"\"\"
-
-        Deși mesajul nu conține suficiente date personale (nume complet, prenume, număr de telefon), răspunde politicos și util la conținutul mesajului, **în funcție de limbajul utilizatorului** (Română sau Rusă).
-
-        La finalul răspunsului, **roagă-l prietenos să trimită numele complet și un număr de telefon valid** pentru a putea continua înscrierea sau procesul de rezervare.
-
-        Scrie un răspuns natural, fără să întrebi din nou ce a scris.
-
-        Limbajul utilizatorului este: {language.upper()}
-        """
-
-        messages = [
-            {"role": "system", "content": prompt},
-        ]
-
-        reply = chat_with_openai(messages , temperature=0.7 , max_tokens=400)
-        reply += " !!! "
-
-        return jsonify({"reply": reply})
-        
-    # number_valid = check_number(message)
-    nr , status = extrage_si_valideaza_numar(message)
+    nr, status = extrage_si_valideaza_numar(message)
     print(f"valid = {status}")
 
     saved["numar"] = nr
+
     if counter['count'] == 0:
-        saved["mesaj"] = message
-    
+        saved["mesaj"] = message  # salvează inițial mesajul
+
     if status != "VALID":
         if language == "RO":
             reply = "Numărul introdus nu este valid. Te rog să scrii din nou numarul."
-            if counter["count"] == 0:
-                saved["mesaj"] += " " + message
-            counter["count"] +=1
         else:
             reply = "Введённый номер недействителен. Пожалуйста, введите заново номер."
-            if counter["count"] == 0:
-                saved["mesaj"] += " " + message
-            counter["count"] +=1
 
+        # La încercările următoare (count > 0), poți concatena mesajele dacă vrei
+        if counter["count"] > 0:
+            saved["mesaj"] += " " + message
+
+        counter["count"] += 1
         return jsonify({"reply": reply})
 
+    # Dacă numărul este valid, resetează counter-ul
+    counter['count'] = 0
 
+    mesaj_final = f"Mesajul initial : {saved['mesaj']}\nNumar de telefon corect : {saved['numar']}"
+    log_message("USER", mesaj_final)
 
-    
-    message = "Mesajul initial : " + saved["mesaj"] + f"\n Numar de telefon corect : {saved["numar"]}"  
-    counter['count'] == 0
-    log_message("USER", message)
-
-    url = f"https://api.telegram.org/bot{TELEGRAM}/sendMessage?chat_id={CHAT_ID}&text={message}"
-
+    url = f"https://api.telegram.org/bot{TELEGRAM}/sendMessage?chat_id={CHAT_ID}&text={mesaj_final}"
     response = requests.get(url)
 
     if language.upper() == "RO":
@@ -1808,6 +1759,7 @@ def return_message():
         reply = "Mulțumim! Îți dorim o zi frumoasă."
 
     return jsonify({"reply": reply})
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
