@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./LiveChat.css";
 import livechatopenbg from "../assets/Group 71.png";
 import closebutton from "../assets/closebutton.png";
@@ -35,6 +35,16 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
 
 
@@ -414,6 +424,43 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
     }
   }, [open]);
 
+
+  // ✅ Inițializare - întreabă limba
+  useEffect(() => {
+    scrollToBottom();
+    if (open) {
+      setVisible(true);
+      if (messages.length === 0 && onboardingStep === 0) {
+        setLoading(true);
+        fetch("http://127.0.0.1:5000/language")
+          .then((res) => res.json())
+          .then((data) => {
+            // window.language = data.language || "RO";
+            const botMsg: ChatMessage = {
+              id: Date.now(),
+              text: data.ask_name || "Bun venit! Care este numele tău?",
+              from: "bot",
+            };
+            setMessages([botMsg]);
+            setOnboardingStep(-1);
+          })
+          .catch(() => {
+            const errMsg: ChatMessage = {
+              id: Date.now(),
+              text: "Eroare la comunicarea cu serverul.",
+              from: "bot",
+            };
+            setMessages([errMsg]);
+          })
+          .finally(() => setLoading(false));
+      }
+    } else {
+      const timeout = setTimeout(() => setVisible(false), 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [open]);
+
+
   // ✅ Interfața
   return (
     <div>
@@ -454,6 +501,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
             {loading && (
               <div className="livechat-message livechat-message-bot">...scriu răspuns...</div>
             )}
+            {/* Invisible element to scroll to */}
+            <div ref={messagesEndRef} />
           </div>
           <div className="livechat-input-row">
             <input
