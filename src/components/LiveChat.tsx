@@ -303,14 +303,12 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
         const replyText = data.reply || "Răspuns necunoscut.";
         const botMsg: ChatMessage = { id: Date.now(), text: replyText, from: "bot" };
         setMessages(prev => [...prev, botMsg]);
-        console.log(data.reply)
-        console.log(replyText.includes("Te rog să ne scrii numele tău complet și un număr de telefon valid pentru a putea continua."))
-        if (
-          replyText.includes("Numărul introdus nu este valid") ||
-          replyText.includes("Введённый номер недействителен") ||
-          replyText.includes("!!!")
-        ) {
+        console.log(replyText.includes("Numărul introdus nu este valid"))
+        console.log(replyText.includes("Îți mulțumesc pentru ca ai completat formularul!"))
+        if ( replyText.includes("Numărul introdus nu este valid") || replyText.includes("Введённый номер недействителен") ) {
           setOnboardingStep(9);
+        } else if (replyText.includes("Îți mulțumesc pentru ca ai completat formularul!")){
+          setOnboardingStep(8);
         } else {
           setOnboardingStep(8);
         }

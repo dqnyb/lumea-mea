@@ -1683,14 +1683,6 @@ def este_numar_valid_local(numar):
 def health():
     return "OK", 200
 
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, "index.html")
-
 def extrage_si_valideaza_numar(text):
     pattern = r'(?<!\d)(\+?373\d{8}|373\d{8}|0\d{8})(?!\d)'
     posibile_numere = re.findall(pattern, text)
@@ -1759,6 +1751,16 @@ def return_message():
         reply = "Mulțumim! Îți dorim o zi frumoasă."
 
     return jsonify({"reply": reply})
+
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, "index.html")
+
 
 
 if __name__ == "__main__":
