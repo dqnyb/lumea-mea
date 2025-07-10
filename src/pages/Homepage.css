@@ -312,26 +312,116 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 2000;
+  align-items: center;
+  z-index: 9999;
   cursor: pointer;
 }
 
-.gallery-overlay.active {
-  display: block;
+.gallery-image-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.gallery-overlay img {
-  max-width: 90vw;
-  max-height: 80vh;
+.gallery-overlay-image {
+  max-width: 100%;
+  max-height: 35vw;
+  width: 50vw;
   object-fit: contain;
+  cursor: default;
   border-radius: 2vw;
-  animation: zoom-in 0.3s ease;
+}
+
+.gallery-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.gallery-nav-arrow:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-prev-arrow {
+  left: 20px;
+}
+
+.gallery-next-arrow {
+  right: 20px;
+}
+
+
+.gallery-close-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.gallery-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  z-index: 10001;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .gallery-nav-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .gallery-prev-arrow {
+    left: 10px;
+  }
+  
+  .gallery-next-arrow {
+    right: 10px;
+  }
+  
+  .gallery-close-button {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+  
+  .gallery-counter {
+    bottom: 10px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
 }
 
 .homepage-aboutus-description {
@@ -401,15 +491,23 @@
 
 .homepage-partners-title {
   text-align: center;
+  font-size: 2vw;
 }
 
 .homepage-partners-description{
   font-family: "Manrope", sans-serif;
-  font-size: 1.5vw;
+  font-size: 1vw;
   font-weight: 500;
   color: #2C2C2C;
   margin: 0;
   text-align: center;
+  margin-top: -3vw;
+}
+
+.homepage-other-content-harta {
+  width: 100vw;
+  margin-top: -10vw;
+  margin-bottom: 7vw;
 }
 
 .homepage-partners ul {
@@ -419,8 +517,8 @@
   align-items: center;
   list-style: none;
   padding: 0;
-  margin: 2vw auto;
-  gap: 3vw;
+  margin: 0vw auto;
+  gap: 1vw;
   width: 100%;
 }
 

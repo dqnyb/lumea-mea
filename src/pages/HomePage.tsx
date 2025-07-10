@@ -36,6 +36,7 @@ import iconcoordonator from "../assets/iconcoordonator.svg"
 import partener1 from "../assets/partener1.svg"
 import partener2 from "../assets/partener2.svg"
 import partener3 from "../assets/partener3.svg"
+import harta from "../assets/harta.jpg"
 
 interface HomePageProps {
   currentLang: 'ro' | 'ru';
@@ -45,23 +46,107 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
   const [liveChatOpen, setLiveChatOpen] = useState(false);
 
+  // Gallery images array for navigation
+  const galleryImages = [
+    gallery1, gallery2, gallery3, gallery4, gallery5, gallery6, gallery7,
+    gallery8, gallery9, gallery10, gallery11, gallery12, gallery13, gallery14
+  ];
+
   useEffect(() => {
     const handleImageClick = (e: MouseEvent) => {
       const img = e.target as HTMLImageElement;
       if (img.tagName === 'IMG' && img.closest('.gallery-list')) {
-        const overlay = document.createElement('div');
-        overlay.className = 'gallery-overlay';
+        // Find the index of the clicked image
+        const clickedSrc = img.src;
+        const imageIndex = galleryImages.findIndex(galleryImg => 
+          clickedSrc.includes(galleryImg.split('/').pop() || '')
+        );
         
-        const zoomedImg = img.cloneNode(true) as HTMLImageElement;
-        // Remove the zoomed class since we're styling through gallery-overlay img
-        overlay.appendChild(zoomedImg);
-        
-        overlay.addEventListener('click', () => {
-          document.body.removeChild(overlay);
-        });
-        
-        document.body.appendChild(overlay);
+        showGalleryOverlay(imageIndex);
       }
+    };
+
+    const showGalleryOverlay = (currentIndex: number) => {
+      const overlay = document.createElement('div');
+      overlay.className = 'gallery-overlay';
+      
+      // Create image container
+      const imageContainer = document.createElement('div');
+      imageContainer.className = 'gallery-image-container';
+      
+      // Create image element
+      const zoomedImg = document.createElement('img');
+      zoomedImg.src = galleryImages[currentIndex];
+      zoomedImg.className = 'gallery-overlay-image';
+      imageContainer.appendChild(zoomedImg);
+      
+      // Create previous arrow
+      const prevArrow = document.createElement('button');
+      prevArrow.className = 'gallery-nav-arrow gallery-prev-arrow';
+      prevArrow.innerHTML = '‹';
+      prevArrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const newIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
+        document.body.removeChild(overlay);
+        showGalleryOverlay(newIndex);
+      });
+      
+      // Create next arrow
+      const nextArrow = document.createElement('button');
+      nextArrow.className = 'gallery-nav-arrow gallery-next-arrow';
+      nextArrow.innerHTML = '›';
+      nextArrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const newIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
+        document.body.removeChild(overlay);
+        showGalleryOverlay(newIndex);
+      });
+      
+      // Create close button
+      
+      
+      // Create image counter
+      const imageCounter = document.createElement('div');
+      imageCounter.className = 'gallery-counter';
+      imageCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+      
+      // Append elements to overlay
+      overlay.appendChild(imageContainer);
+      overlay.appendChild(prevArrow);
+      overlay.appendChild(nextArrow);
+      overlay.appendChild(imageCounter);
+      
+      // Close on overlay click (but not on image or arrows)
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          document.body.removeChild(overlay);
+        }
+      });
+      
+      // Keyboard navigation
+      const handleKeyPress = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft') {
+          const newIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
+          document.body.removeChild(overlay);
+          showGalleryOverlay(newIndex);
+        } else if (e.key === 'ArrowRight') {
+          const newIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
+          document.body.removeChild(overlay);
+          showGalleryOverlay(newIndex);
+        } else if (e.key === 'Escape') {
+          document.body.removeChild(overlay);
+          document.removeEventListener('keydown', handleKeyPress);
+        }
+      };
+      
+      document.addEventListener('keydown', handleKeyPress);
+      
+      // Remove keyboard listener when overlay is closed
+      overlay.addEventListener('DOMNodeRemoved', () => {
+        document.removeEventListener('keydown', handleKeyPress);
+      });
+      
+      document.body.appendChild(overlay);
     };
 
     document.addEventListener('click', handleImageClick);
@@ -69,7 +154,7 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
     return () => {
       document.removeEventListener('click', handleImageClick);
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [galleryImages]);
 
   // Function to scroll to the about us section
   const scrollToAboutUs = () => {
@@ -148,6 +233,7 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
         </div>
       </div>
       <div className='homepage-other-content'>
+        <img src={harta} className='homepage-other-content-harta'/>
         <h1 className='homepage-whyus-text'>{translations[currentLang].homepage.whyus}</h1>
         <img src={currentLang === 'ru' ? whyusru : whyus} className='homepage-whyus-img' />
         <div className='homepage-coordinator-message'>
@@ -161,7 +247,6 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
           <p className='homepage-coordinator-message-name'>{translations[currentLang].homepage.coordinatorname}</p>
           <p className='homepage-coordinator-message-job'>{translations[currentLang].homepage.coordinatorjob}</p>
         </div>
-        <h1 className='homepage-gallery-text'>{translations[currentLang].homepage.gallery}</h1>
         <ul className='gallery-list'>
           <li>
             <img src={gallery1} />
