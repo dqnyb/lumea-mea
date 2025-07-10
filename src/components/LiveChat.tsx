@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LiveChat.css";
-import livechatopenbg from "../assets/Group 71.png";
+import livechatopenbg from "../assets/Group 71a.png";
 import closebutton from "../assets/closebutton.png";
 import sendicon from "../assets/sendicon.png";
 import chatboticon from "../assets/chatlogo.svg";
