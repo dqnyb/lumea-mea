@@ -197,7 +197,7 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
             </a>
           </li>
           <li>
-            <a href="https://lumeata.md/5%20all%20elements%20%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80%D1%8B%20%D0%B8%20%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE" target="_blank" rel="noopener noreferrer">
+            <a href="https://gonomad.ro/" target="_blank" rel="noopener noreferrer">
               <img src={partener2}/>
             </a>
           </li>
