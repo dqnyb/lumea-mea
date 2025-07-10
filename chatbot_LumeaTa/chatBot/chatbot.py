@@ -1514,11 +1514,11 @@ def exemple():
         if language.upper() == "RO":
             log_message("USER", "vrea sa continuie cu rezervarea locului")
             reply = (
-                "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n"
-                "- Nume complet\n"
-                "- Număr de telefon\n"
-                "- Adresă de email\n"
-                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)"
+                "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n<br>"
+                "- Nume complet\n<br>"
+                "- Număr de telefon (care se începe cu 0 sau +373) \n<br>"
+                "- Adresă de email\n<br>"
+                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)<br>"
             )
         elif language.upper() == "RU":
             log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с бронированием места")
