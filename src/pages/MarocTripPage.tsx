@@ -18,10 +18,8 @@ import day6Image from "../assets/MarocCalendar6.jpg";
 import day7Image from "../assets/MarocCalendar7.jpg";
 import day8Image from "../assets/MarocCalendar8.jpg";
 import priceinfo1ro from "../assets/pretinfoMaroc1.jpg"
-import priceinfo2ro from "../assets/pretinfoMaroc2.jpg"
 import priceinfo3ro from "../assets/pretinfoMaroc3.jpg"
 import priceinfo1ru from "../assets/pretinfoMaroc1ru.jpg"
-import priceinfo2ru from "../assets/pretinfoMaroc2ru.jpg"
 import priceinfo3ru from "../assets/pretinfoMaroc3ru.jpg"
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
@@ -34,6 +32,7 @@ import Timer from "../components/timer"
 import maroctimer from "../assets/maroctimer.jpg"
 import LiveChat from '../components/LiveChat';
 import secondbg from "../assets/image (1).png"
+import Experienta from '../components/experienta';
 
 interface MarocTripPageProps {
   currentLang: 'ro' | 'ru';
@@ -87,9 +86,6 @@ const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang })
                 <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
               </li>
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
-              </li>
-              <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro}/>
               </li>
             </ul>
@@ -117,9 +113,10 @@ const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang })
                 image={maroctimer}
                 title={translations[currentLang].Maroc.timertitle}
                 description={translations[currentLang].Maroc.timerdescription}
-                date="13/10/2026"
+                date="20/9/2025"
                 setLiveChatOpen={setLiveChatOpen}
-              />            
+              />
+            <Experienta currentLang={currentLang}/>            
             <Contacts currentLang={currentLang}/>
             <Footer currentLang={currentLang}/>
         </div>

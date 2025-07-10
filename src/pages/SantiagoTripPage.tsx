@@ -24,12 +24,11 @@ import blueline from "../assets/longblueline.svg"
 import Timer from "../components/timer"
 import santiagotimer from "../assets/santiagotimer.jpg"
 import priceinfo1ro from "../assets/priceonfosinagpor1.jpg"
-import priceinfo2ro from "../assets/priceonfosinagpor2.jpg"
 import priceinfo3ro from "../assets/priceonfosinagpor3.jpg"
 import priceinfo1ru from "../assets/priceonfosinagpor1.jpg"
-import priceinfo2ru from "../assets/priceonfosinagpor2.jpg"
 import priceinfo3ru from "../assets/priceonfosinagpor3.jpg"
 import LiveChat from '../components/LiveChat';
+import Experienta from '../components/experienta';
 
 const SantiagoTripPage: React.FC = () => {
   const [currentLang, setCurrentLang] = useState<'ro' | 'ru'>('ru');
@@ -82,9 +81,6 @@ const SantiagoTripPage: React.FC = () => {
                 <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
               </li>
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
-              </li>
-              <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />
               </li>
             </ul>
@@ -114,7 +110,8 @@ const SantiagoTripPage: React.FC = () => {
                 description={translations[currentLang].Santiago.timerdescription}
                 date="13/10/2026"
                 setLiveChatOpen={setLiveChatOpen}
-              />        
+              />
+            <Experienta currentLang={currentLang}/>        
             <Contacts currentLang={currentLang}/>
             <Footer currentLang={currentLang}/>
             

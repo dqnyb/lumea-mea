@@ -12,12 +12,14 @@ const translations = {
     home: "Главная",
     calendar: "Календарь",
     blog: "Блог",
+    faq: "FAQ",
     contacts: "Контакты",
   },
   ro: {
     home: "Acasă",
     calendar: "Calendar",
     blog: "Blog",
+    faq: "FAQ",
     contacts: "Contacte",
   }
 };
@@ -114,6 +116,9 @@ const Navbar: React.FC<NavBarProps> = ({ currentLang, setCurrentLang }) => {
         </Link>
         <Link to="/blog">
           {translations[currentLang].blog}
+        </Link>
+        <Link to="/faq">
+          {translations[currentLang].faq}
         </Link>
         <a href="#" onClick={handleContactsClick}>{translations[currentLang].contacts}</a>
         <div className="language-switcher">

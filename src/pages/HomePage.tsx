@@ -30,6 +30,12 @@ import gallery11 from "../assets/galerie/image (10).jpg"
 import gallery12 from "../assets/galerie/image (11).jpg"
 import gallery13 from "../assets/galerie/image (12).jpg"
 import gallery14 from "../assets/galerie/image (13).jpg"
+import coordonatorjos from "../assets/mesajcoordonatorjos.svg"
+import coordonatorsus from "../assets/mesajcoordonatorsus.svg"
+import iconcoordonator from "../assets/iconcoordonator.svg"
+import partener1 from "../assets/partener1.svg"
+import partener2 from "../assets/partener2.svg"
+import partener3 from "../assets/partener3.svg"
 
 interface HomePageProps {
   currentLang: 'ro' | 'ru';
@@ -144,6 +150,17 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
       <div className='homepage-other-content'>
         <h1 className='homepage-whyus-text'>{translations[currentLang].homepage.whyus}</h1>
         <img src={currentLang === 'ru' ? whyusru : whyus} className='homepage-whyus-img' />
+        <div className='homepage-coordinator-message'>
+          <img src={coordonatorsus} className='homepage-coordinator-message-img' />
+            <div 
+                className='homepage-coordinator-message-text' 
+                dangerouslySetInnerHTML={{ __html: translations[currentLang].homepage.coordinatormessage }}
+              />
+          <img src={coordonatorjos} className='homepage-coordinator-message-img' />
+          <img src={iconcoordonator} className='homepage-coordinator-message-icon' />
+          <p className='homepage-coordinator-message-name'>{translations[currentLang].homepage.coordinatorname}</p>
+          <p className='homepage-coordinator-message-job'>{translations[currentLang].homepage.coordinatorjob}</p>
+        </div>
         <h1 className='homepage-gallery-text'>{translations[currentLang].homepage.gallery}</h1>
         <ul className='gallery-list'>
           <li>
@@ -170,7 +187,27 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
           </li>
         </ul>
       </div>
-      
+      <div className='homepage-partners'>
+        <h1 className='homepage-partners-title'>{translations[currentLang].homepage.prietenititlu}</h1>
+        <h1 className='homepage-partners-description'>{translations[currentLang].homepage.prietenidescriere}</h1>
+        <ul>
+          <li>
+            <a href="https://gonomad.ro/" target="_blank" rel="noopener noreferrer">
+              <img src={partener1}/>
+            </a>
+          </li>
+          <li>
+            <a href="https://lumeata.md/5%20all%20elements%20%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D0%B5%D1%80%D1%8B%20%D0%B8%20%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE" target="_blank" rel="noopener noreferrer">
+              <img src={partener2}/>
+            </a>
+          </li>
+          <li>
+            <a href="https://jyotish.md/" target="_blank" rel="noopener noreferrer">
+              <img src={partener3}/>
+            </a>
+          </li>
+        </ul>
+      </div>
       <div className="homepage-footer-section" id="footer-section">
         <Contacts currentLang={currentLang}/>
         <Footer currentLang={currentLang}/>

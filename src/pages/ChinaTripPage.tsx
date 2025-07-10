@@ -17,10 +17,8 @@ import day5Image from "../assets/chinacalendar5.jpg";
 import day6Image from "../assets/chinacalendar6.jpg";
 import day7Image from "../assets/chinacalendar7.jpg";
 import priceinfo1ro from "../assets/chinapriceinforo1.jpg"
-import priceinfo2ro from "../assets/chinapriceinforo2.jpg"
 import priceinfo3ro from "../assets/chinapriceinforo3.jpg"
 import priceinfo1ru from "../assets/chinapriceinforu1.jpg"
-import priceinfo2ru from "../assets/chinapriceinforu2.jpg"
 import priceinfo3ru from "../assets/chinapriceinforu3.jpg"
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
@@ -32,6 +30,7 @@ import blueline from "../assets/longblueline.svg"
 import Timer from "../components/timer"
 import chinatimer from "../assets/chinatimer.jpg"
 import LiveChat from '../components/LiveChat';
+import Experienta from '../components/experienta';
 
 interface ChinaTripPageProps {
   currentLang: 'ro' | 'ru';
@@ -82,9 +81,6 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                 <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
               </li>
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
-              </li>
-              <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />
               </li>
             </ul>
@@ -114,7 +110,8 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                 description={translations[currentLang].China.timerdescription}
                 date="13/10/2026"
                 setLiveChatOpen={setLiveChatOpen}
-              />      
+              />
+              <Experienta currentLang={currentLang}/>      
             <Contacts currentLang={currentLang}/>
             <Footer currentLang={currentLang}/>
         </div>

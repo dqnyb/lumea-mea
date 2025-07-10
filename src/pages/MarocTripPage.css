@@ -172,7 +172,7 @@
 }
 
 .trippage-price {
-  font-size: 3vw;
+  font-size: 2vw;
   color: #2C2C2C;
   font-family: "Manrope", sans-serif;
 }
@@ -215,8 +215,10 @@
 .trippage-nevoie-title {
   color: #ffffff;
   background: #00417A;
+  height: 4vw;
   width: 70vw;
   margin-left: 15vw;
+  font-size: 3vw;
 }
 
 .trippage-nevoie-descritpion{

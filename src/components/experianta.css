@@ -1,0 +1,117 @@
+.experienta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5vw 2vw;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.experienta-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 3.5vw;
+  font-weight: 700;
+  color: #00417A;
+  margin: 0 0 2vw 0;
+  max-width: 80vw;
+  width: 40vw;
+}
+
+.experienta-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2vw;
+  font-weight: 400;
+  color: #2C2C2C;
+  line-height: 1.6;
+  margin: 0 0 4vw 0;
+  max-width: 70vw;
+}
+
+.experienta-social-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3vw;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experienta-social-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.experienta-social-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4vw;
+  height: 4vw;
+  background-color: #00417A;
+  border-radius: 0.8vw;
+  padding: 1vw;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  width: 15vw;
+}
+
+.experienta-social-button:hover {
+  transform: scale(1.2) translateY(-0.3vw);
+  background-color: #003366;
+  box-shadow: 0 0.8vw 1.5vw rgba(0, 65, 122, 0.4);
+}
+
+.experienta-social-button img {
+  width: 2.5vw;
+  height: 2.5vw;
+  object-fit: contain;
+  filter: brightness(0) invert(1); 
+  transition: all 0.3s ease;
+}
+
+.experienta-social-button:hover img {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .experienta {
+    padding: 8vw 4vw;
+  }
+  
+  .experienta-title {
+    font-size: 6vw;
+    max-width: 90vw;
+    margin-bottom: 4vw;
+  }
+  
+  .experienta-description {
+    font-size: 3.5vw;
+    max-width: 90vw;
+    margin-bottom: 6vw;
+  }
+  
+  .experienta-social-list {
+    gap: 6vw;
+  }
+  
+  .experienta-social-button {
+    width: 12vw;
+    height: 12vw;
+    padding: 2vw;
+    border-radius: 1vw; /* Updated border-radius for mobile as well */
+  }
+  
+  .experienta-social-button img {
+    width: 6vw;
+    height: 6vw;
+  }
+  
+  .experienta-social-button:hover {
+    transform: scale(1.15) translateY(-1vw);
+  }
+}

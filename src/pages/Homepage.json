@@ -8,14 +8,20 @@
       "tripButton": "Rezervă-ți locul",
       "tripDescription": "Făcând clic pe buton, îți dai consimțământul pentru prelucrarea datelor personale și ești de acord cu politica de confidențialitate.",
       "whyus":"Dece sa calătorești cu noi?",
-      "gallery":"Galerie" 
+      "gallery":"Galerie",
+      "coordinatormessage" : "Lumea Ta – drumul tău spre noi culmi, creștere interioară și aventuri care îți schimbă viața.<br>Creăm trasee unice, unde fiecare călătorie nu este doar un drum, ci o oportunitate de a simți libertatea, de a te cufunda în cultură, de a explora necunoscutul și de a te lăsa inspirat de frumusețea naturii.<br><br>Aici nu există trasee standard – doar emoții autentice, descoperiri reale și momente care vor rămâne cu tine pentru totdeauna. Credem că adevărata călătorie nu înseamnă doar schimbarea locurilor, ci o transformare profundă a sufletului.<br>„Omului nu-i trebuie mult pentru a fi fericit: un cer curat, orizonturi îndepărtate și un drum deschis.”<br><br>— Jack Kerouac, Pe drum",
+      "coordinatorname" : "Natalia",
+      "coordinatorjob" : "Coordonator și ghid experimentat",
+      "prietenititlu": "Prietenii și partenerii noștri",
+      "prietenidescriere": "Vrei să faci parte din echipa Lumea Ta? Hai cu noi să creăm împreună aventuri de neuitat!"
+
     },
      "aboutus":{
       "title": "Despre Noi",
       "description": "Lumea Ta este mai mult decât o agenție de turism – este o comunitate de oameni pasionați de natură, mișcare și explorare autentică. Oferim experiențe personalizate de trekking, hiking, expediții, tururi tematice, ciclism montan, retreaturi și programe pentru familii sau grupuri corporate. Suntem ghizi licențiați, cu expertiză montană și logistică solidă, care pun pe primul loc siguranța, profesionalismul și conexiunea autentică cu natura. Fiecare tur este gândit cu grijă – de la alegerea traseului și a locurilor de cazare, până la micile detalii care transformă o simplă drumeție într-o amintire de neuitat.",
       "icon1": "Sigur",
       "icon2": "Rapid",
-      "icon3": "Ieftin"
+      "icon3": "Calitativ"
     }
   },
   "ru": {
@@ -27,14 +33,19 @@
       "tripButton": "Забронировать место",
       "tripDescription": "Нажимая кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности.",
       "whyus":"Почему стоит путешествовать с нами?",
-      "gallery":"Галерея" 
+      "gallery":"Галерея",
+      "coordinatormessage" :"Ваш мир – ваш путь к новым вершинам, внутреннему росту и приключениям, меняющим жизнь.<br>Мы создаём уникальные маршруты, где каждое путешествие – не просто дорога, а возможность ощутить свободу, погрузиться в культуру, исследовать неизведанное и вдохновиться красотой природы.<br><br>Здесь нет стандартных маршрутов – только подлинные эмоции, настоящие открытия и моменты, которые останутся с вами навсегда. Мы верим, что настоящее путешествие – это не просто смена мест, а глубокая трансформация души.<br>«Человеку нужно немного для счастья: чистое небо, далёкий горизонт и открытая дорога».<br><br>— Джек Керуак, «В дороге»" ,
+      "coordinatorname" : "Наталья",
+      "coordinatorjob" : "Опытный координатор и гид",
+      "prietenititlu": "Наши друзья и партнеры",
+      "prietenidescriere": "Хотите стать частью команды Lumea Ta? Присоединяйтесь к нам и вместе с нами создайте незабываемые приключения!"
     },
     "aboutus":{
       "title": "О нас",
       "description": "Your World — это больше, чем туристическое агентство, это сообщество людей, увлеченных природой, движением и подлинными исследованиями. Мы предлагаем персонализированные треккинги, походы, экспедиции, тематические туры, катание на горных велосипедах, ретриты и программы для семей или корпоративных групп.<br>Мы лицензированные гиды с солидным опытом работы в горах и логистике, которые ставят безопасность, профессионализм и подлинную связь с природой на первое место. Каждый тур тщательно продуман — от выбора маршрута и размещения до мелких деталей, которые превращают простой поход в незабываемое воспоминание.",
       "icon1": "Безопасно",
       "icon2": "Быстро",
-      "icon3": "Дешёво"
+      "icon3": "Качественный"
     }
   }
 }

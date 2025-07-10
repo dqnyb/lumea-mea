@@ -73,8 +73,8 @@
 }
 
 .contacts li img {
-  width: 3vw;
-  height: 3vw;
+  width: 2vw;
+  height: 2vw;
   cursor: pointer;
   transition: transform 0.3s ease;
 }

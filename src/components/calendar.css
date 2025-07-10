@@ -18,22 +18,23 @@
   font-size: 1.2vw;
   font-weight: 500;
   background-color: #ffffff;
-  color: #00417A;
+  color: #000000;
   padding: 1vw 2vw;
   border-radius: 0.7vw 0.7vw 0 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border: 0.2vw solid #00417A;
+  border: 0.2vw solid transparent;
 }
 
 .calendar-button:hover {
-  background-color: #003366;
-  color: #ffffff;
+  border: 0.2vw solid #00417A;
+  color: #00417A;
 }
 
 .calendar-button.active {
-  background-color: #00417A;
-  color: #ffffff;
+  border: 0.2vw solid #00417A;
+  color: #00417A;
+  font-weight: 800;
 }
 
 .calendar-title {

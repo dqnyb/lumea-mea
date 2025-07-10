@@ -8,6 +8,7 @@ import Maroc from "./pages/MarocTripPage"
 import China from "./pages/ChinaTripPage"
 import Santiago from "./pages/SantiagoTripPage"
 import InWork from "./pages/inwork"
+import FAQ from './pages/FAQ'
 
 function App() {
   const [currentLang, setCurrentLang] = useState<'ro' | 'ru'>(() => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/china" element={<China currentLang={currentLang} setCurrentLang={setCurrentLang} />} />
         <Route path="/santiago" element={<Santiago />} />
         <Route path="/inwork" element={<InWork currentLang={currentLang} setCurrentLang={setCurrentLang} />} />
+        <Route path="/faq" element={<FAQ currentLang={currentLang} setCurrentLang={setCurrentLang} />} />
       </Routes>
     </Router>
   )

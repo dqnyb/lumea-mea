@@ -69,6 +69,53 @@
   margin-right: 0vw;
 }
 
+.homepage-coordinator-message {
+  width: 60vw;
+  margin-top: 10vw;
+  margin-left: 20vw;
+  margin-bottom: 5vw;
+}
+
+
+.homepage-coordinator-message-text {
+  color: #00417A;
+  font-family: "Manrope", sans-serif;
+  font-size: 1vw;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 1.5vw;
+  margin-bottom: 1.5vw;
+}
+
+.homepage-coordinator-message-icon {
+  width: 10vw;
+  position: absolute;
+  margin-left: -55vw;
+  margin-top: 5vw;
+}
+
+.homepage-coordinator-message-name {
+  color: #00417A;
+  font-family: "Manrope", sans-serif;
+  font-size: 2.5vw;
+  font-weight: 700;
+  margin-left: -10vw;
+  margin-top: 4vw;
+}
+
+.homepage-coordinator-message-job {
+  color: #000000;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.1vw;
+  font-weight: 700;
+  margin-left: -5vw;
+  margin-top: 0vw;
+}
+
+.homepage-coordinator-message-img {
+  width: 60vw;
+}
+
 .homepage-description {
   position: relative;
   font-family: "Raleway", sans-serif;
@@ -336,15 +383,84 @@
   text-align: center;
 }
 
-.homepage-whyus-text,.homepage-gallery-text {
+.homepage-whyus-text,.homepage-gallery-text,.homepage-partners-title {
   font-family: "Raleway", sans-serif;
   font-size: 4vw;
   font-weight: 700;
   color: #00417A;
   margin-bottom: 5vw;
 }
+
+.homepage-partners {
+  margin-top: 20vw;
+}
+
 .homepage-gallery-text {
   margin-top: 10vw;
+}
+
+.homepage-partners-title {
+  text-align: center;
+}
+
+.homepage-partners-description{
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5vw;
+  font-weight: 500;
+  color: #2C2C2C;
+  margin: 0;
+  text-align: center;
+}
+
+.homepage-partners ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 2vw auto;
+  gap: 3vw;
+  width: 100%;
+}
+
+.homepage-partners li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage-partners li a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.homepage-partners li a:hover {
+  transform: scale(1.1);
+}
+
+.homepage-partners li img {
+  max-width: 15vw;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.homepage-partners li img:hover {
+  opacity: 0.8;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .homepage-partners ul {
+    flex-wrap: wrap;
+    gap: 5vw;
+  }
+  
+  .homepage-partners li img {
+    max-width: 25vw;
+  }
 }
 
 .homepage-gallery-img {
@@ -458,6 +574,28 @@
     align-items: center;
     width: 100%;
   }
+  .homepage-coordinator-message-text {
+    font-size: 3vw;
+  }
+  .homepage-coordinator-message-img {
+    height: 5vw;
+    }
+  .homepage-coordinator-message-icon {
+    width: 15vw;
+  }
+
+  .homepage-coordinator-message-name {
+    font-size: 4vw;
+    margin-left: 5vw;
+    margin-top: 1vw;
+  } 
+  .homepage-coordinator-message-job {
+    font-size: 2.3vw;
+    margin-left: 20vw;
+    margin-top: 1vw;
+  } 
+
+
 
   .gallery-list li {
     display: flex;
