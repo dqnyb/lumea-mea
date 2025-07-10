@@ -1733,21 +1733,21 @@ def simple_chat():
         if language.upper() == "RO":
             log_message("USER", "vrea sa continuie cu rezervarea locului")
             reply = (
-                "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n"
+                "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:<br>\n"
                 "- Nume complet\n"
-                "- Număr de telefon\n"
-                "- Adresă de email\n"
-                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)"
+                "- Număr de telefon (care se începe cu 0 sau +373) <br>\n"
+                "- Adresă de email<br>\n"
+                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)<br>"
             )
         elif language.upper() == "RU":
             log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с бронированием места")
             reply = (
-                "Отлично! 😊 Чтобы продолжить бронирование, пожалуйста, укажите следующую информацию:\n"
-                "- Полное имя\n"
-                        "- Номер телефона\n"
-                        "- Адрес электронной почты\n"
-                        "- Любые дополнительные детали (например, количество людей, предпочитаемые даты)"
-                    )
+                "Отлично! 😊 Чтобы продолжить бронирование, пожалуйста, укажите следующую информацию:\n<br>"
+                "- Полное имя <br>\n"
+                "- Номер телефона (который начинается с 0 или +373) <br>\n"
+                "- Адрес электронной почты <br>\n"
+                "- Любые дополнительные детали (например, количество людей, предпочитаемые даты)<br>"
+            )
 
     return jsonify({"reply": reply})
 
