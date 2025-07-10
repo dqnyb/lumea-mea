@@ -33,7 +33,7 @@ import maroctimer from "../assets/maroctimer.jpg"
 import LiveChat from '../components/LiveChat';
 import secondbg from "../assets/image (1).png"
 import Experienta from '../components/experienta';
-import marocPdf from "../assets/info.pdf"; // Add your PDF file here
+
 
 interface MarocTripPageProps {
   currentLang: 'ro' | 'ru';
@@ -42,16 +42,6 @@ interface MarocTripPageProps {
 
 const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang }) => {
   const [liveChatOpen, setLiveChatOpen] = useState(false);
-
-  // Function to handle PDF download
-  const handleDownloadPdf = () => {
-    const link = document.createElement('a');
-    link.href = marocPdf;
-    link.download = currentLang === 'ro' ? 'Informatii-Maroc.pdf' : 'Информация-Марокко.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div className="trippage">
