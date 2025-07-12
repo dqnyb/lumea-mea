@@ -179,9 +179,9 @@
 
 .trippage-info-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   list-style: none;
   margin: 4vw 0;
   padding: 0;
@@ -189,16 +189,49 @@
   width: 100%;
 }
 
+.trippage-atentie {
+  text-align: center;
+}
+
+.trippage-atentie-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: #ff4901;
+  margin: 0 auto;
+  width: 70vw;
+  margin-bottom: 2vw;
+}
+
+.trippage-atentie-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2vw;
+  color: #2C2C2C;
+  margin: 0 auto;
+  width: 70vw;
+  text-align: left;
+}
+
 .trippage-info-list-item {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 60vw;
+  max-width: 45%; 
+}
+
+.trippage-info-list-item:nth-child(3) {
+  max-width: 80%; 
+  margin: 0 auto; 
+}
+
+.trippage-info-list-item:nth-child(3) img {
+  width: 77vw; 
+  height: auto;
 }
 
 .trippage-info-list-item img {
-  width: 100%;
+  width: 30vw;
   height: auto;
   object-fit: cover;
   border-radius: 1vw;
@@ -210,6 +243,43 @@
   transform: scale(1.08);
   z-index: 2;
   box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .trippage-atentie-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 4.5vw;
+  font-weight: 700;
+  color: #ff4901;
+  margin: 0 auto;
+  width: 70vw;
+  margin-bottom: 2vw;
+}
+
+.trippage-atentie-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 3.5vw;
+  color: #2C2C2C;
+  margin: 0 auto;
+  width: 70vw;
+  text-align: left;
+}
+  .trippage-info-list-item {
+    max-width: 100%;
+  }
+  
+  .trippage-info-list-item:nth-child(3) {
+    max-width: 100%;
+  }
+  
+  .trippage-info-list-item img {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto 4vw auto;
+  }
 }
 
 .trippage-nevoie-title {
@@ -243,26 +313,6 @@
   .trippage-price {
     font-size: 6vw;
   }
-    .trippage-info-list-item img {
-    width: 100vw;
-    max-width: 100vw;
-    height: auto;
-    display: block;
-    margin: 0 auto 4vw auto;
-  }
-  .trippage-nevoie-title {
-    font-size: 8vw;
-    width: 95vw;
-    margin: 0 auto 4vw auto;
-    left: unset;
-    right: unset;
-    display: block;
-  }
-  .trippage-nevoie-descritpion {
-    font-size: 4vw;
-    width: 95vw;
-    margin-left: 5vw;
-  }
 }
 
 .trippage-download-button {
@@ -276,10 +326,10 @@
   padding: 1vw 2vw;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 2vw auto; /* Changed from '2vw 0' to '2vw auto' for horizontal centering */
-  display: block; /* Keep as block to allow margin auto to work */
+  margin: 2vw auto; 
+  display: block; 
   text-align: center;
-  width: fit-content; /* Add this to make the button only as wide as its content */
+  width: fit-content;
 }
 
 .trippage-download-button:hover {
@@ -306,7 +356,7 @@
     font-size: 3.5vw;
     padding: 3vw 6vw;
     border-radius: 1.5vw;
-    margin: 4vw auto; /* Also center on mobile */
+    margin: 4vw auto; 
   }
 }
 

@@ -1,0 +1,197 @@
+.reguli-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Hero Section */
+.reguli-hero {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.reguli-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.reguli-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00417A;
+  z-index: 2;
+}
+
+.reguli-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  max-width: 80vw;
+}
+
+.reguli-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 4vw;
+  font-weight: 700;
+  margin-bottom: 1vw;
+  color: white;
+}
+
+.reguli-description {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.8vw;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
+/* Content Section */
+.reguli-content {
+  padding: 5vw 5vw 3vw 5vw;
+  background-color: #ffffff;
+}
+
+.reguli-container {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.reguli-section {
+  margin-bottom: 3vw;
+  padding-bottom: 2vw;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.reguli-section:last-child {
+  border-bottom: none;
+}
+
+.reguli-section-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 2vw;
+  font-weight: 600;
+  color: #00417A;
+  margin-bottom: 1vw;
+}
+
+.reguli-section-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2vw;
+  font-weight: 400;
+  color: #2C2C2C;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.reguli-last-updated {
+  margin-top: 4vw;
+  padding-top: 2vw;
+  border-top: 2px solid #00417A;
+  text-align: center;
+}
+
+.reguli-last-updated p {
+  font-family: "Manrope", sans-serif;
+  font-size: 1vw;
+  font-weight: 500;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.reguli-footer-section {
+  margin-top: 5vw;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reguli-hero {
+    height: 40vh;
+  }
+
+  .reguli-hero-content {
+    max-width: 90vw;
+  }
+
+  .reguli-title {
+    font-size: 7vw;
+    margin-bottom: 2vw;
+  }
+
+  .reguli-description {
+    font-size: 3.5vw;
+    max-width: 85vw;
+  }
+
+  .reguli-content {
+    padding: 8vw 5vw 5vw 5vw;
+  }
+
+  .reguli-container {
+    max-width: 90vw;
+  }
+
+  .reguli-section {
+    margin-bottom: 5vw;
+    padding-bottom: 3vw;
+  }
+
+  .reguli-section-title {
+    font-size: 4.5vw;
+    margin-bottom: 2vw;
+  }
+
+  .reguli-section-text {
+    font-size: 3vw;
+    line-height: 1.6;
+  }
+
+  .reguli-last-updated {
+    margin-top: 6vw;
+    padding-top: 3vw;
+  }
+
+  .reguli-last-updated p {
+    font-size: 2.5vw;
+  }
+
+  .reguli-footer-section {
+    margin-top: 8vw;
+  }
+}
+
+/* Tablet responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .reguli-title {
+    font-size: 5vw;
+  }
+
+  .reguli-description {
+    font-size: 2vw;
+    max-width: 70vw;
+  }
+
+  .reguli-section-title {
+    font-size: 2.5vw;
+  }
+
+  .reguli-section-text {
+    font-size: 1.5vw;
+  }
+
+  .reguli-last-updated p {
+    font-size: 1.2vw;
+  }
+}

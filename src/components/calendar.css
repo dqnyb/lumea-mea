@@ -23,16 +23,16 @@
   border-radius: 0.7vw 0.7vw 0 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border: 0.2vw solid transparent;
+  border: 1vw solid transparent;
 }
 
 .calendar-button:hover {
-  border: 0.2vw solid #00417A;
+  border: 0.11vw solid #00417A;
   color: #00417A;
 }
 
 .calendar-button.active {
-  border: 0.2vw solid #00417A;
+  border: 0.11vw solid #00417A;
   color: #00417A;
   font-weight: 800;
 }
@@ -51,7 +51,7 @@
   margin-top: 0.2vw;
   margin-left: 10vw;
   margin-right: 10vw;
-  border: 0.2vw solid #00417A;
+  border: 0.11vw solid #00417A;
   border-radius: 0 0.7vw 0.7vw 0.7vw; 
 }
 

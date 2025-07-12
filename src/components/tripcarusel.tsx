@@ -79,22 +79,25 @@ const TripCarousel: React.FC<TripCarouselProps> = ({ currentLang }) => {
                         </div>
                     </div>
                 </li>
-                <li className='trip-item'>
-                    <div className='trip-card'>
-                        <img src={trip3} className='trip-card-image' alt="Santiago trip"/>
-                        <div className='trip-card-overlay'>
-                            <h1 className='trip-card-title'>{translations[currentLang].trip3title}</h1>
-                            <p className='trip-card-description'>{translations[currentLang].trip3description}</p>
-                            <p className='trip-card-price'>{translations[currentLang].trip3price}</p>
-                            <button 
-                              className='trip-card-button'
-                              onClick={() => handleTripClick('/santiago')}
-                            >
-                              {translations[currentLang].tripbutton}
-                            </button>
-                        </div>
-                    </div>
-                </li>
+                {/* Only show Santiago card when language is Russian */}
+                {currentLang === 'ru' && (
+                  <li className='trip-item'>
+                      <div className='trip-card'>
+                          <img src={trip3} className='trip-card-image' alt="Santiago trip"/>
+                          <div className='trip-card-overlay'>
+                              <h1 className='trip-card-title'>{translations[currentLang].trip3title}</h1>
+                              <p className='trip-card-description'>{translations[currentLang].trip3description}</p>
+                              <p className='trip-card-price'>{translations[currentLang].trip3price}</p>
+                              <button 
+                                className='trip-card-button'
+                                onClick={() => handleTripClick('/santiago')}
+                              >
+                                {translations[currentLang].tripbutton}
+                              </button>
+                          </div>
+                      </div>
+                  </li>
+                )}
             </ul>
         </div>
     </div>

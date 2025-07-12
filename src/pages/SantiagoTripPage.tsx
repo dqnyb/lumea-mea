@@ -24,7 +24,9 @@ import blueline from "../assets/longblueline.svg"
 import Timer from "../components/timer"
 import santiagotimer from "../assets/santiagotimer.jpg"
 import priceinfo1ro from "../assets/priceonfosinagpor1.jpg"
+import priceinfo2ru from "../assets/priceonfosinagpor2.jpg"
 import priceinfo3ro from "../assets/priceonfosinagpor3.jpg"
+import priceinfo2ro from "../assets/priceonfosinagpor2.jpg"
 import priceinfo1ru from "../assets/priceonfosinagpor1.jpg"
 import priceinfo3ru from "../assets/priceonfosinagpor3.jpg"
 import LiveChat from '../components/LiveChat';
@@ -54,7 +56,14 @@ const SantiagoTripPage: React.FC = () => {
       </div>
       <div className='trippage-informations'>
         <div className='trippage-informations-about'>
-            <About currentLang={currentLang} period={translations[currentLang].Santiago.period} duration={translations[currentLang].Santiago.duration} difficulty={translations[currentLang].Santiago.difficulty} price={translations[currentLang].Santiago.price}/>
+            <About 
+              currentLang={currentLang} 
+              period={translations[currentLang].Santiago.period} 
+              duration={translations[currentLang].Santiago.duration} 
+              difficulty={translations[currentLang].Santiago.difficulty} 
+              price={translations[currentLang].Santiago.price}
+              setLiveChatOpen={setLiveChatOpen}
+            />
             <TripDescription 
               currentLang={currentLang}
               description={translations[currentLang].Santiago.tripDescription}
@@ -79,6 +88,9 @@ const SantiagoTripPage: React.FC = () => {
             <ul className="trippage-info-list">
               <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
+              </li>
+              <li className="trippage-info-list-item">
+                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
               </li>
               <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />
@@ -114,7 +126,6 @@ const SantiagoTripPage: React.FC = () => {
             <Experienta currentLang={currentLang}/>        
             <Contacts currentLang={currentLang}/>
             <Footer currentLang={currentLang}/>
-            
         </div>
       </div>
     </div>

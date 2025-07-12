@@ -45,7 +45,7 @@
 
 .trip-card-overlay {
   position: absolute;
-  top: 8vw;
+  top: 0vw;
   left: 0;
   width: 20vw;
   height: 100%;
@@ -63,6 +63,7 @@
   font-size: 1.2vw;
   font-weight: 700;
   margin: 0 0 0.7vw 0;
+  color: #2C2C2C;
 }
 
 .trip-card-description {
@@ -71,13 +72,15 @@
   font-weight: 300;
   margin: 0 0 1.5vw 0;
   line-height: 1.4;
+  color: #2C2C2C;
+
 }
 
 .trip-card-price {
   font-family: "Manrope", sans-serif;
   font-size: 1.4vw;
   font-weight: 600;
-  margin: 0 0 1.5vw 0;
+  margin: 16vw 0 1.5vw 0;
   color: #ffffff;
 }
 
@@ -122,12 +125,14 @@
   }
 
   .trip-card-title {
-    font-size: 4vw;
+    font-size: 5vw;
+    color: #ffffff;
   }
 
   .trip-card-description {
-    font-size: 2.5vw;
+    font-size: 4vw;
     width: 90%;
+    color: #ffffff;
   }
 
   .trip-card-price {

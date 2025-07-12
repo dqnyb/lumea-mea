@@ -17,8 +17,10 @@ import day5Image from "../assets/chinacalendar5.jpg";
 import day6Image from "../assets/chinacalendar6.jpg";
 import day7Image from "../assets/chinacalendar7.jpg";
 import priceinfo1ro from "../assets/chinapriceinforo1.jpg"
+import priceinfo2ro from "../assets/chinapriceinforu2.jpg"
 import priceinfo3ro from "../assets/chinapriceinforo3.jpg"
 import priceinfo1ru from "../assets/chinapriceinforu1.jpg"
+import priceinfo2ru from "../assets/chinapriceinforu2.jpg"
 import priceinfo3ru from "../assets/chinapriceinforu3.jpg"
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
@@ -52,13 +54,30 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
       </div>
       <div className='trippage-informations'>
         <div className='trippage-informations-about'>
-            <About currentLang={currentLang} period={translations[currentLang].China.period} duration={translations[currentLang].China.duration} difficulty={translations[currentLang].China.difficulty} price={translations[currentLang].China.price}/>
+            <About 
+              currentLang={currentLang} 
+              period={translations[currentLang].China.period} 
+              duration={translations[currentLang].China.duration} 
+              difficulty={translations[currentLang].China.difficulty} 
+              price={translations[currentLang].China.price}
+              setLiveChatOpen={setLiveChatOpen} 
+            />
             <TripDescription 
               currentLang={currentLang}
               description={translations[currentLang].China.tripDescription}
               text={translations[currentLang].China.tripText}
               image={chinadescription}
             />
+            <div className='trippage-atentie'>
+              <div 
+                  className='trippage-atentie-title' 
+                  dangerouslySetInnerHTML={{ __html: translations[currentLang].China.atentie }}
+                />
+              <div 
+                  className='trippage-atentie-description' 
+                  dangerouslySetInnerHTML={{ __html: translations[currentLang].China.atentieText }}
+                />
+            </div>
             <h1 className="trippage-invisible-mark">h</h1>
             <Calendar 
                 currentLang={currentLang}
@@ -79,6 +98,9 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
             <ul className="trippage-info-list">
               <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
+              </li>
+               <li className="trippage-info-list-item">
+                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
               </li>
               <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />

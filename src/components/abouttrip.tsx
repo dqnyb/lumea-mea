@@ -11,6 +11,7 @@ interface AboutTripProps {
   duration: string;
   difficulty: string;
   price: string;
+  setLiveChatOpen?: (open: boolean) => void; // Add this prop for opening the chatbot
 }
 
 const translations = {
@@ -34,28 +35,31 @@ const translations = {
   }
 };
 
-const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, difficulty, price }) => {
-  const scrollToBottom = () => {
-    // Method inspired by navbar.tsx - find contacts or footer element directly
-    const contactsElement = document.querySelector('.contacts');
-    const footerElement = document.querySelector('.footer');
-    
-    if (contactsElement) {
-      contactsElement.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    } else if (footerElement) {
-      footerElement.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, difficulty, price, setLiveChatOpen }) => {
+  const handleButtonClick = () => {
+    if (setLiveChatOpen) {
+      setLiveChatOpen(true);
     } else {
-      // Fallback: scroll to end of document
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth'
-      });
+      // Fallback: scroll to bottom if setLiveChatOpen is not provided
+      const contactsElement = document.querySelector('.contacts');
+      const footerElement = document.querySelector('.footer');
+      
+      if (contactsElement) {
+        contactsElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else if (footerElement) {
+        footerElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -94,7 +98,7 @@ const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, di
       </ul>
       <button 
         className="abouttrip-button" 
-        onClick={scrollToBottom}
+        onClick={handleButtonClick}
       >
         {translations[currentLang].button}
       </button>
