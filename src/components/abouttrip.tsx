@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
 import './abouttrip.css';
 import perioada from "../assets/perioada.svg";
 import durata from "../assets/durata.svg";
@@ -36,6 +37,8 @@ const translations = {
 };
 
 const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, difficulty, price, setLiveChatOpen }) => {
+  const navigate = useNavigate(); // Add this line
+
   const handleButtonClick = () => {
     if (setLiveChatOpen) {
       setLiveChatOpen(true);
@@ -102,7 +105,28 @@ const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, di
       >
         {translations[currentLang].button}
       </button>
-      <p className="abouttrip-description">{translations[currentLang].description}</p>
+      <h1 className="abouttrip-description">
+        {(() => {
+          const fullText = translations[currentLang].description;
+          const words = fullText.split(' ');
+          const lastThreeWords = words.slice(-3).join(' ');
+          const remainingText = words.slice(0, -3).join(' ');
+          
+          return (
+            <>
+              {remainingText}{' '}
+              <span 
+                onClick={() => {
+                  window.location.href = '/reguli';
+                }}
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                {lastThreeWords}
+              </span>
+            </>
+          );
+        })()}
+      </h1>
     </div>
   );
 };
