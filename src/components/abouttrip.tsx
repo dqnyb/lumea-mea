@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this import
 import './abouttrip.css';
 import perioada from "../assets/perioada.svg";
 import durata from "../assets/durata.svg";
@@ -12,7 +11,7 @@ interface AboutTripProps {
   duration: string;
   difficulty: string;
   price: string;
-  setLiveChatOpen?: (open: boolean) => void; // Add this prop for opening the chatbot
+  setLiveChatOpen?: (open: boolean) => void; 
 }
 
 const translations = {
@@ -37,13 +36,11 @@ const translations = {
 };
 
 const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, difficulty, price, setLiveChatOpen }) => {
-  const navigate = useNavigate(); // Add this line
 
   const handleButtonClick = () => {
     if (setLiveChatOpen) {
       setLiveChatOpen(true);
     } else {
-      // Fallback: scroll to bottom if setLiveChatOpen is not provided
       const contactsElement = document.querySelector('.contacts');
       const footerElement = document.querySelector('.footer');
       
