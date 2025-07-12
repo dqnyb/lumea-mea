@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
 import './Homepage.css';
 import NavBar from "../components/navbar"
 import translations from "./Homepage.json"
@@ -45,6 +46,7 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
   const [liveChatOpen, setLiveChatOpen] = useState(false);
+  const navigate = useNavigate(); // Add this line
 
   // Gallery images array for navigation
   const galleryImages = [
@@ -209,7 +211,26 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
         >
           {translations[currentLang].homepage.tripButton}
         </button>
-        <h1 className='homepage-trip-description'>{translations[currentLang].homepage.tripDescription}</h1>
+        <h1 className='homepage-trip-description'>
+          {(() => {
+            const fullText = translations[currentLang].homepage.tripDescription;
+            const words = fullText.split(' ');
+            const lastThreeWords = words.slice(-3).join(' ');
+            const remainingText = words.slice(0, -3).join(' ');
+            
+            return (
+              <>
+                {remainingText}{' '}
+                <span 
+                  onClick={() => navigate('/reguli')}
+                  style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                >
+                  {lastThreeWords}
+                </span>
+              </>
+            );
+          })()}
+        </h1>
       </div>
       <div className='homepage-aboutus-section'>
         <img src={abotusimage} className='homepage-aboutus-image' />
