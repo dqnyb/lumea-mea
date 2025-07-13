@@ -15,7 +15,7 @@
 
 .calendar-button {
   font-family: "Manrope", sans-serif;
-  font-size: 1.2vw;
+  font-size: 1.1vw;
   font-weight: 500;
   background-color: #ffffff;
   color: #000000;
@@ -64,7 +64,9 @@
 }
 
 .calendar-content-image {
-  width: 30vw;
+  max-height: 40vw;
+  max-width: 25vw;
+  width: auto;
   height: auto;
   object-fit: cover;
   border-radius: 0.5vw;
