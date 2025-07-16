@@ -134,7 +134,7 @@ const SantiagoTripPage: React.FC = () => {
                 image={santiagotimer}
                 title={translations[currentLang].Santiago.timertitle}
                 description={translations[currentLang].Santiago.timerdescription}
-                date="13/10/2026"
+                date="16/10/2025"
                 setLiveChatOpen={setLiveChatOpen}
               />
             <Experienta currentLang={currentLang}/>        

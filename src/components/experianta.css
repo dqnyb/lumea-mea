@@ -15,7 +15,7 @@
   color: #00417A;
   margin: 0 0 2vw 0;
   max-width: 80vw;
-  width: 40vw;
+  width: 60vw;
 }
 
 .experienta-description {
@@ -84,8 +84,8 @@
   }
   
   .experienta-title {
-    font-size: 6vw;
-    max-width: 90vw;
+    font-size: 8vw;
+    width: 90vw;
     margin-bottom: 4vw;
   }
   
@@ -103,7 +103,7 @@
     width: 12vw;
     height: 12vw;
     padding: 2vw;
-    border-radius: 1vw; /* Updated border-radius for mobile as well */
+    border-radius: 1vw;
   }
   
   .experienta-social-button img {

@@ -143,7 +143,7 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                 image={chinatimer}
                 title={translations[currentLang].China.timertitle}
                 description={translations[currentLang].China.timerdescription}
-                date="13/10/2026"
+                date="16/10/2025"
                 setLiveChatOpen={setLiveChatOpen}
               />
               <Experienta currentLang={currentLang}/>      

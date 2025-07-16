@@ -181,12 +181,31 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   list-style: none;
-  margin: 4vw 0;
+  margin: 0;
   padding: 0;
-  gap: 2vw;
+  gap: 2vw; /* No gap, we use margin instead */
   width: 100%;
+}
+
+.trippage-info-list-item {
+  width: 40%;      /* Make them fit in a row */
+  max-width: 48%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trippage-info-list-item:nth-child(1) {
+  margin-right: -10vw; /* Small space between first and second */
+}
+
+.trippage-info-list-item:nth-child(3) {
+  width: 100%;
+  max-width: 80%;
+  margin: 2vw auto 0 auto;
 }
 
 .trippage-atentie {
@@ -226,7 +245,7 @@
 }
 
 .trippage-info-list-item:nth-child(3) img {
-  width: 77vw; 
+  width: 67vw; 
   height: auto;
 }
 
@@ -312,6 +331,10 @@
   .trippage-info-title {
     font-size: 8vw;
   }
+
+  .trippage-info-list-item:nth-child(1) {
+  margin-right: 0vw; /* Small space between first and second */
+}
   .trippage-price {
     font-size: 6vw;
   }
@@ -383,4 +406,27 @@
   height: 0;
   margin: 0;
   padding: 0;
+}
+
+@media (max-width: 768px) {
+  .trippage-nevoie-title {
+    font-size: 7vw;
+    height: auto;
+    width: 90vw;
+    margin-left: 5vw;
+    line-height: 1.2;
+    padding: 3vw 0;
+  }
+  .trippage-nevoie-descritpion {
+    font-size: 4vw;
+    width: 90vw;
+    margin-left: 5vw;
+    padding: 2vw 0;
+  }
+  .trippage-nevoie-blueline {
+    width: 96vw;
+    margin-left: 2vw;
+    height: 5vw;
+    margin-top: 5vw;
+  }
 }
