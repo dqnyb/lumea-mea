@@ -5,6 +5,7 @@ import translations from "./TripPage.json";
 import Footer from "../components/footer";
 import Contacts from "../components/contacts";
 import bg from "../assets/santiagobg.jpg"
+import bgmob from "../assets/santiagobgmob.jpg"
 import About from "../components/abouttrip";
 import TripDescription from "../components/treidescription";
 import santiagodescription from "../assets/santiagodescription.jpg";
@@ -37,7 +38,10 @@ import Experienta from '../components/experienta';
 const SantiagoTripPage: React.FC = () => {
   const [currentLang, setCurrentLang] = useState<'ro' | 'ru'>('ru');
   const [liveChatOpen, setLiveChatOpen] = useState(false);
-  
+
+  const isMobile = window.innerWidth <= 768;
+  const mainBg = isMobile ? bgmob : bg;
+
   const preventLanguageChange = (lang: 'ro' | 'ru') => {
     console.log(`Language change to ${lang} blocked - staying as 'ru'`);
   };
@@ -50,7 +54,7 @@ const SantiagoTripPage: React.FC = () => {
     <div className="trippage">
       <NavBar currentLang={currentLang} setCurrentLang={preventLanguageChange} />
       <LiveChat open={liveChatOpen} setOpen={setLiveChatOpen} />
-      <img src={bg} className='trippage-bg'/>
+      <img src={mainBg} className='trippage-bg'/>
       <div className="trippage-fog-overlay"></div>
       <div className="trippage-content">
         <h1 className="trippage-title">{translations[currentLang].Santiago.title}</h1>

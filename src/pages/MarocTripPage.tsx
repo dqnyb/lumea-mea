@@ -5,6 +5,7 @@ import translations from "./TripPage.json";
 import Footer from "../components/footer";
 import Contacts from "../components/contacts";
 import bg from "../assets/maroc ng.jpg"
+import bgmob from "../assets/maroc ngmob.jpg"
 import About from "../components/abouttrip";
 import TripDescription from "../components/treidescription";
 import marocdescription from "../assets/marocdescription.jpg"; 
@@ -46,6 +47,8 @@ interface MarocTripPageProps {
 
 const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang }) => {
   const [liveChatOpen, setLiveChatOpen] = useState(false);
+  const isMobile = window.innerWidth <= 768;
+  const mainBg = isMobile ? bgmob : bg;
 
   // Function to handle PDF download
   // const handleDownloadPdf = () => {
@@ -61,7 +64,7 @@ const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang })
     <div className="trippage">
       <NavBar currentLang={currentLang} setCurrentLang={setCurrentLang} />
       <LiveChat open={liveChatOpen} setOpen={setLiveChatOpen} />
-      <img src={bg} className='trippage-bg'/>
+      <img src={mainBg} className='trippage-bg'/>
       <img src={secondbg} className='trippage-second-bg'/>
       <div className="trippage-fog-overlay"></div>
       <h1 className="trippage-title">{translations[currentLang].Maroc.title}</h1>

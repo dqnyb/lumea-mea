@@ -81,6 +81,18 @@
   line-height: 1.6;
 }
 
+.calendar-arrow {
+  display: inline-block;
+  margin-left: 2vw;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  font-size: 4vw;
+  vertical-align: middle;
+}
+
+.calendar-arrow.open {
+  transform: rotate(180deg);
+}
+
 
 @media (max-width: 768px) {
   .calendar {

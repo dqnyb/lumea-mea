@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProgramrarePage.css';
 import mainbg from "../assets/programarebg.jpg"
+import mainbgmob from "../assets/programarebgmob.jpg"
 import secondbg from "../assets/image12.png"
 import card1 from "../assets/programrarecard1.png"
 import card2 from "../assets/programrarecard2.png"
@@ -54,14 +55,15 @@ interface ProgramrarePageProps {
 
 const ProgramrarePage: React.FC<ProgramrarePageProps> = ({ currentLang, setCurrentLang }) => {
   const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
+  const mainBg = isMobile ? mainbgmob : mainbg;
 
   return (
     <div className="programrare-page">
       <NavBar currentLang={currentLang} setCurrentLang={setCurrentLang} />
       <LiveChat/>
-      <img src={mainbg} className="programrare-page-mainbg" />
+      <img src={mainBg} className="programrare-page-mainbg" />
       <img src={secondbg} className="programrare-page-secondbg" />
-      <div className="programrare-page-fog-overlay"></div>
       {currentLang === 'ro' ? (
         <h1 className="programrare-page-title">{translations['ro'].pageTitle}</h1>
       ) : (

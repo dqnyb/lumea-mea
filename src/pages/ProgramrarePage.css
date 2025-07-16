@@ -177,9 +177,10 @@
 
 @media (max-width: 768px) {
 
-  .programrare-page-title {
-  font-size: 8vw;
-  left:65vw;
+  .programrare-page-title,.programrare-page-title-ru{
+  font-size: 10vw;
+  left:50vw;
+  top: 40vw;
 }
 
   .programrare-page-secondbg {

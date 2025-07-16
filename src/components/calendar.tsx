@@ -3,7 +3,7 @@ import './calendar.css';
 
 const translations = {
   ru: {
-    title : "Расписание поездки"
+    title : "Дополнительно о поездке"
   },
   ro: {
     title : "Programul călătoriei"
@@ -33,6 +33,14 @@ const Calendar: React.FC<CalendarProps> = ({ currentLang, buttonCount, buttonTex
             onClick={() => setActiveButton(activeButton === i ? null : i)}
           >
             {buttonTexts[i]}
+            {isMobile && (
+              <span
+                className={`calendar-arrow${activeButton === i ? ' open' : ''}`}
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+            )}
           </button>
           {isMobile && activeButton === i && (
             <div className="calendar-content">

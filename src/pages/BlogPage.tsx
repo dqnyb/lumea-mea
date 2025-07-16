@@ -4,6 +4,7 @@ import NavBar from "../components/navbar";
 import translations from "./BlogPage.json";
 import Footer from "../components/footer";
 import Bg from "../assets/blogmainbg.jpg";
+import Bgmob from "../assets/blogmainbgmob.jpg";
 import Contacts from "../components/contacts";
 import secBg from "../assets/blogsecondbg.png";
 import blueline from "../assets/blueline.svg";
@@ -28,10 +29,13 @@ interface BlogPageProps {
 }
 
 const BlogPage: React.FC<BlogPageProps> = ({ currentLang, setCurrentLang }) => {
+  const isMobile = window.innerWidth <= 768;
+  const mainBg = isMobile ? Bgmob : Bg;
+
   return (
     <div className="blogpage">
         <div className='mainpage'>
-            <img src={Bg} className='blogpage-main-bg' />
+            <img src={mainBg} className='blogpage-main-bg' />
             <img src={secBg} className='blogpage-second-bg' />
             <div className="blogpage-fog-overlay"></div>
             <NavBar currentLang={currentLang} setCurrentLang={setCurrentLang} />
