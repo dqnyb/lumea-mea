@@ -63,10 +63,12 @@
   align-items: flex-start;
 }
 
+
+
 .calendar-content-image {
-  max-height: 40vw;
-  max-width: 25vw;
-  width: auto;
+  max-width: 25vw;   /* increase from 25vw to 40vw */
+  max-height: 100vw;  /* increase from 40vw to 60vw */
+  width: 100%;       /* or set to 100% for full container width */
   height: auto;
   object-fit: cover;
   border-radius: 0.5vw;
@@ -137,10 +139,12 @@
   .calendar-content-image {
     width: 100%;
     max-width: 100vw;
+    max-height: 100vw;
     height: auto;
     border-radius: 2vw;
     margin-bottom: 2vw;
   }
+
 
   .calendar-content-text {
     font-size: 3.5vw;
