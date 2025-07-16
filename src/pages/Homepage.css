@@ -559,6 +559,14 @@
   .homepage-partners li img {
     max-width: 25vw;
   }
+  .homepage-partners-title {
+    text-align: center;
+    font-size: 6vw;
+  }
+  .homepage-partners-description {
+    font-size: 3vw;
+    
+  }
 }
 
 .homepage-gallery-img {
