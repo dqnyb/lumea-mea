@@ -38,10 +38,16 @@ const Navbar: React.FC<NavBarProps> = ({ currentLang, setCurrentLang }) => {
   const handleLanguageChange = (lang: 'ro' | 'ru') => {
     setCurrentLang(lang);
     setDropdownOpen(false);
+    setMobileMenuOpen(false); // Close mobile menu after language selection
   };
 
   const handleHomeClick = () => {
     setShouldScrollHome(true);
+    setMobileMenuOpen(false); // Close mobile menu when navigating to home
+  };
+
+  const handleNavLinkClick = () => {
+    setMobileMenuOpen(false); // Close mobile menu when clicking nav links
   };
 
   const scrollToBottom = () => {
@@ -71,6 +77,7 @@ const Navbar: React.FC<NavBarProps> = ({ currentLang, setCurrentLang }) => {
   const handleContactsClick = (e: React.MouseEvent) => {
     e.preventDefault();
     scrollToBottom();
+    setMobileMenuOpen(false); // Close mobile menu when clicking contacts
   };
 
   // Close mobile menu on route change
@@ -111,13 +118,13 @@ const Navbar: React.FC<NavBarProps> = ({ currentLang, setCurrentLang }) => {
         <Link to="/" onClick={handleHomeClick}>
           {translations[currentLang].home}
         </Link>
-        <Link to="/calendar">
+        <Link to="/calendar" onClick={handleNavLinkClick}>
           {translations[currentLang].calendar}
         </Link>
-        <Link to="/blog">
+        <Link to="/blog" onClick={handleNavLinkClick}>
           {translations[currentLang].blog}
         </Link>
-        <Link to="/faq">
+        <Link to="/faq" onClick={handleNavLinkClick}>
           {translations[currentLang].faq}
         </Link>
         <a href="#" onClick={handleContactsClick}>{translations[currentLang].contacts}</a>
