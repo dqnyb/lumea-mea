@@ -257,6 +257,8 @@
   margin-bottom: 2vw;
 }
 
+
+
 .trippage-atentie-description {
   font-family: "Manrope", sans-serif;
   font-size: 3.5vw;
@@ -313,6 +315,22 @@
   .trippage-price {
     font-size: 6vw;
   }
+  .trippage-info-list-item img {
+    width: 90vw; 
+    height: auto;
+  }
+
+  .trippage-info-list-item img:hover {
+    transform: none;
+    z-index: auto;
+    box-shadow: none;
+  }
+
+  .trippage-info-list-item:nth-child(3) img {
+  width: 90vw; 
+  height: auto;
+} 
+
 }
 
 .trippage-download-button {

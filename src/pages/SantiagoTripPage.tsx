@@ -26,9 +26,11 @@ import santiagotimer from "../assets/santiagotimer.jpg"
 import priceinfo1ro from "../assets/priceonfosinagpor1.jpg"
 import priceinfo2ru from "../assets/priceonfosinagpor2.jpg"
 import priceinfo3ro from "../assets/priceonfosinagpor3.jpg"
+import priceinfo3romob from "../assets/priceonfosinagpor3mob.jpg"
 import priceinfo2ro from "../assets/priceonfosinagpor2.jpg"
 import priceinfo1ru from "../assets/priceonfosinagpor1.jpg"
 import priceinfo3ru from "../assets/priceonfosinagpor3.jpg"
+import priceinfo3rumob from "../assets/priceonfosinagpor3mob.jpg"
 import LiveChat from '../components/LiveChat';
 import Experienta from '../components/experienta';
 
@@ -92,8 +94,15 @@ const SantiagoTripPage: React.FC = () => {
               <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
               </li>
-              <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />
+             <li className="trippage-info-list-item">
+                <img className="trippage-info-list-item-3"
+                  src={
+                    window.innerWidth <= 768
+                      ? (currentLang === 'ru' ? priceinfo3rumob : priceinfo3romob)
+                      : (currentLang === 'ru' ? priceinfo3ru : priceinfo3ro)
+                  }
+                  alt="Price Info"
+                />
               </li>
             </ul>
             <Echpament currentLang={currentLang} itemDescriptions={translations[currentLang].Santiago.echipament}/>

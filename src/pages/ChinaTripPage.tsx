@@ -19,9 +19,11 @@ import day7Image from "../assets/chinacalendar7.jpg";
 import priceinfo1ro from "../assets/chinapriceinforo1.jpg"
 import priceinfo2ro from "../assets/chinapriceinforu2.jpg"
 import priceinfo3ro from "../assets/chinapriceinforo3.jpg"
+import priceinfo3romob from "../assets/chinapriceinforo3mob.jpg"
 import priceinfo1ru from "../assets/chinapriceinforu1.jpg"
 import priceinfo2ru from "../assets/chinapriceinforu2.jpg"
 import priceinfo3ru from "../assets/chinapriceinforu3.jpg"
+import priceinfo3rumob from "../assets/chinapriceinforu3mob.jpg"
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
 import allineedtoknoeimg2 from "../assets/marocalltoknow2.jpg"
@@ -102,8 +104,15 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                <li className="trippage-info-list-item">
                 <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
               </li>
-              <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo3ru : priceinfo3ro} />
+             <li className="trippage-info-list-item">
+                <img className="trippage-info-list-item-3"
+                  src={
+                    window.innerWidth <= 768
+                      ? (currentLang === 'ru' ? priceinfo3rumob : priceinfo3romob)
+                      : (currentLang === 'ru' ? priceinfo3ru : priceinfo3ro)
+                  }
+                  alt="Price Info"
+                />
               </li>
             </ul>
             <Echpament currentLang={currentLang} itemDescriptions={translations[currentLang].China.echipament}/>

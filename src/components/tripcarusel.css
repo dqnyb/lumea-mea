@@ -122,6 +122,7 @@
     width: 100%;
     top: 40vw;
     padding: 2vw 0;
+    margin-top: -20vw;
   }
 
   .trip-card-title {
@@ -137,6 +138,7 @@
 
   .trip-card-price {
     font-size: 3.5vw;
+    margin-top: 0vw;
   }
 
   .trip-card-button {

@@ -58,7 +58,7 @@
   width: 100%;
 }
 
-.homepage-title {
+.homepage-title, .homepage-title-ru {
   font-family: "Raleway", sans-serif;
   font-size: 5vw;
   width: 60vw;
@@ -573,7 +573,7 @@
   width: 80vw;
 }
 @media (max-width: 768px) {
-  .homepage-title {
+  .homepage-title ,.homepage-title-ru {
     font-size: 8vw;
     margin-top: -10vw;
     margin-right: 0;
@@ -581,21 +581,21 @@
     text-align: center;
   }
 
-  .homepage-description {
+  .homepage-description,.homepage-description-ru {
     font-size: 4vw;
     width: 80vw;
     margin-right: 0;
     left: 5vw;
-    top: 18vw;
+    top: 12vw;
     text-align: center;
     position: static;
   }
 
-  .homepage-button {
+  .homepage-button,.homepage-button-ru {
     font-size: 3.5vw;
     padding: 3vw 6vw;
     position: static;
-    margin: 4vw auto 0 auto; /* centers the button horizontally */
+    margin: 4vw auto 0 auto; 
     left: unset;
     top: unset;
     transform: none;
