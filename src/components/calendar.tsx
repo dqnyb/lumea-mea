@@ -19,20 +19,42 @@ interface CalendarProps {
   id?: string;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ currentLang, buttonCount, buttonTexts, buttonContents, buttonImages }) => {
-  const [activeButton, setActiveButton] = useState<number | null>(0);
+const Calendar: React.FC<CalendarProps> = ({ currentLang, buttonCount, buttonTexts, buttonContents, buttonImages}) => {
+  const isMobile = window.innerWidth <= 768;
+  const [activeButton, setActiveButton] = useState<number | null>(isMobile ? null : 0);
 
   const renderButtons = () => {
     const buttons = [];
     for (let i = 0; i < buttonCount && i < buttonTexts.length; i++) {
       buttons.push(
-        <button 
-          key={i} 
-          className={`calendar-button ${activeButton === i ? 'active' : ''}`}
-          onClick={() => setActiveButton(activeButton === i ? null : i)}
-        >
-          {buttonTexts[i]}
-        </button>
+        <React.Fragment key={i}>
+          <button 
+            className={`calendar-button ${activeButton === i ? 'active' : ''}`}
+            onClick={() => setActiveButton(activeButton === i ? null : i)}
+          >
+            {buttonTexts[i]}
+          </button>
+          {isMobile && activeButton === i && (
+            <div className="calendar-content">
+              <div className="calendar-content-inner">
+                <div className="calendar-content-text">
+                  {buttonContents && buttonContents[activeButton] ? (
+                    <div dangerouslySetInnerHTML={{ __html: buttonContents[activeButton] }} />
+                  ) : (
+                    <p>Content for {buttonTexts[activeButton]}</p>
+                  )}
+                </div>
+                {buttonImages && buttonImages[activeButton] && (
+                  <img 
+                    src={buttonImages[activeButton]} 
+                    alt={buttonTexts[activeButton]} 
+                    className="calendar-content-image"
+                  />
+                )}
+              </div>
+            </div>
+          )}
+        </React.Fragment>
       );
     }
     return buttons;
@@ -44,9 +66,8 @@ const Calendar: React.FC<CalendarProps> = ({ currentLang, buttonCount, buttonTex
       <div className="calendar-buttons-row">
         {renderButtons()}
       </div>
-      
-      {/* Display content based on active button */}
-      {activeButton !== null && (
+      {/* Desktop: Display content after all buttons */}
+      {!isMobile && activeButton !== null && (
         <div className="calendar-content">
           <div className="calendar-content-inner">
             <div className="calendar-content-text">

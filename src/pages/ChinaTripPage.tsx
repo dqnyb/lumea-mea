@@ -94,7 +94,8 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                 day5Image,
                 day6Image,
                 day7Image,
-              ]}/>
+              ]}
+              />
               <h1 className="trippage-info-title">{translations[currentLang].China.sectionPriceTitle}</h1>
             <h1 className="trippage-price">{translations[currentLang].China.sectionPriceDescritpion}</h1>
             <ul className="trippage-info-list">

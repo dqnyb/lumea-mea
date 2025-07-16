@@ -133,7 +133,11 @@
   .calendar-content-text {
     font-size: 3.5vw;
     line-height: 1.5;
-    text-align: center;
+    text-align: left;
     padding: 0 2vw;
+  }
+  .calendar-button {
+    border: 0.11vw solid #00417A;
+    color: #00417A;
   }
 }

@@ -84,7 +84,8 @@ const SantiagoTripPage: React.FC = () => {
                 day3Image,
                 day4Image,
                 day5Image
-              ]}/>
+              ]}
+              />
                <h1 className="trippage-info-title">{translations[currentLang].Santiago.sectionPriceTitle}</h1>
             <h1 className="trippage-price">{translations[currentLang].Santiago.sectionPriceDescritpion}</h1>
             <ul className="trippage-info-list">
