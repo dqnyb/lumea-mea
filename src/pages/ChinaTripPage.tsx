@@ -14,6 +14,9 @@ import day1Image from "../assets/chinacalendar1.jpg";
 import day2Image from "../assets/chinacalendar2.jpg";
 import day3Image from "../assets/chinacalendar3.jpg";
 import day4Image from "../assets/chinacalendar4.jpg";
+import day2Imagemob from "../assets/chinacalendar2mob.jpg";
+import day3Imagemob from "../assets/chinacalendar3mob.jpg";
+import day4Imagemob from "../assets/chinacalendar4mob.jpg";
 import day5Image from "../assets/chinacalendar5.jpg";
 import day6Image from "../assets/chinacalendar6.jpg";
 import day7Image from "../assets/chinacalendar7.jpg";
@@ -28,6 +31,7 @@ import priceinfo3rumob from "../assets/chinapriceinforu3mob.jpg"
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
 import allineedtoknoeimg2 from "../assets/marocalltoknow2.jpg"
+import allineedtoknoeimg2mob from "../assets/marocalltoknow2mob.jpg"
 import allineedtoknoeimg3 from "../assets/marocalltoknow3.jpg"
 import allineedtoknoeimg4 from "../assets/marocalltoknow1.jpg"
 import allineedtoknoeimg5 from "../assets/marocalltoknow5.jpg"
@@ -89,16 +93,12 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
                 buttonCount={translations[currentLang].China.calendarDays.length} 
                 buttonTexts={translations[currentLang].China.calendarDays} 
                 buttonContents={translations[currentLang].China.calendarContents}
-                buttonImages={[
-                day1Image,
-                day2Image,
-                day3Image,
-                day4Image,
-                day5Image,
-                day6Image,
-                day7Image,
-              ]}
-              id = {"china"}
+                buttonImages={
+                  isMobile
+                    ? [day1Image, day2Imagemob, day3Imagemob, day4Imagemob, day5Image,day6Image, day7Image]
+                    : [day1Image, day2Image, day3Image, day4Image, day5Image, day6Image, day7Image]
+                }
+                id = {"china"}
               />
               <h1 className="trippage-info-title">{translations[currentLang].China.sectionPriceTitle}</h1>
             <h1 className="trippage-price">{translations[currentLang].China.sectionPriceDescritpion}</h1>
@@ -122,17 +122,16 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
             </ul>
             <Echpament currentLang={currentLang} itemDescriptions={translations[currentLang].China.echipament}/>
             <Calendar 
-                currentLang={currentLang}
-                buttonCount={translations[currentLang].China.allneedtoknow.length} 
-                buttonTexts={translations[currentLang].China.allneedtoknow} 
-                buttonContents={translations[currentLang].China.allneedtoknowContent}
-                buttonImages={[
-                allineedtoknoeimg1,
-                allineedtoknoeimg2,
-                allineedtoknoeimg3,
-                allineedtoknoeimg4,
-                allineedtoknoeimg5
-              ]}/>
+              currentLang={currentLang}
+              buttonCount={translations[currentLang].China.allneedtoknow.length} 
+              buttonTexts={translations[currentLang].China.allneedtoknow} 
+              buttonContents={translations[currentLang].China.allneedtoknowContent}
+              buttonImages={
+                isMobile
+                  ? [allineedtoknoeimg1, allineedtoknoeimg2mob, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+                  : [allineedtoknoeimg1, allineedtoknoeimg2, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+              }
+            />
              <h1 className='trippage-nevoie-title'>{translations[currentLang].China.nevoietitle}</h1>
               <div 
                 className='trippage-nevoie-descritpion' 

@@ -18,6 +18,7 @@ import day5Image from "../assets/SantiagoCalendar5.jpg";
 import Echpament from "../components/echipamnt"
 import allineedtoknoeimg1 from "../assets/marocalltoknow1.jpg"
 import allineedtoknoeimg2 from "../assets/marocalltoknow2.jpg"
+import allineedtoknoeimg2mob from "../assets/marocalltoknow2mob.jpg"
 import allineedtoknoeimg3 from "../assets/marocalltoknow3.jpg"
 import allineedtoknoeimg4 from "../assets/marocalltoknow1.jpg"
 import allineedtoknoeimg5 from "../assets/marocalltoknow5.jpg"
