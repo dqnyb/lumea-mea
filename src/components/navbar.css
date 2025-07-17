@@ -129,7 +129,18 @@
     background-color: transparent;
   }
   .navbar-logo {
-    display: none;
+    position: absolute;
+    top: 2vw;
+    left: 4vw;
+    width: 28vw;    /* Make the logo bigger on mobile */
+    height: auto;
+    z-index: 10;
+  }
+  .navbar-logo img {
+    height: 15vw;   /* Make the logo image bigger on mobile */
+    width: auto;
+    margin: 0;
+    display: block;
   }
   .navbar-hamburger {
     display: flex;
@@ -169,6 +180,10 @@
     width: auto;
     margin: 0 auto;
     display: block;
+  }
+  .navbar-menu .navbar-logo {
+    /* Hide the logo inside the menu on mobile to avoid double logo */
+    display: none;
   }
   .navbar-social {
     display: none;

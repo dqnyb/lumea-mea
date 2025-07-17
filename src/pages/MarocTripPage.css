@@ -190,8 +190,8 @@
 }
 
 .trippage-info-list-item {
-  width: 40%;      /* Make them fit in a row */
-  max-width: 48%;
+  width: 60%;      
+  max-width: 60%;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -199,7 +199,7 @@
 }
 
 .trippage-info-list-item:nth-child(1) {
-  margin-right: -10vw; /* Small space between first and second */
+  margin-right: -8vw; 
 }
 
 .trippage-info-list-item:nth-child(3) {
@@ -240,17 +240,17 @@
 }
 
 .trippage-info-list-item:nth-child(3) {
-  max-width: 80%; 
+  max-width: 90%; 
   margin: 0 auto; 
 }
 
 .trippage-info-list-item:nth-child(3) img {
-  width: 67vw; 
+  width: 76vw; 
   height: auto;
 }
 
 .trippage-info-list-item img {
-  width: 30vw;
+  width: 38vw;
   height: auto;
   object-fit: cover;
   border-radius: 1vw;

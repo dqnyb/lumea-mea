@@ -18,7 +18,7 @@ import day5Image from "../assets/chinacalendar5.jpg";
 import day6Image from "../assets/chinacalendar6.jpg";
 import day7Image from "../assets/chinacalendar7.jpg";
 import priceinfo1ro from "../assets/chinapriceinforo1.jpg"
-import priceinfo2ro from "../assets/chinapriceinforu2.jpg"
+import priceinfo2ro from "../assets/chinapriceinforo2.jpg"
 import priceinfo3ro from "../assets/chinapriceinforo3.jpg"
 import priceinfo3romob from "../assets/chinapriceinforo3mob.jpg"
 import priceinfo1ru from "../assets/chinapriceinforu1.jpg"

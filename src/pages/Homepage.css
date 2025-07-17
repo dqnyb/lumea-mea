@@ -292,20 +292,7 @@
   cursor: pointer;
 }
 
-.gallery-list li img.zoomed {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(2);
-  z-index: 2000;
-  max-width: 90vw;
-  max-height: 90vh;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain;
-  border-radius: 0;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-}
+
 
 /* Add overlay when image is zoomed */
 .gallery-overlay {
@@ -395,6 +382,7 @@
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+
   .gallery-nav-arrow {
     width: 40px;
     height: 40px;
@@ -736,5 +724,13 @@
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-overlay-image {
+    width: 90vw;
+    max-height: 70vw;
+    border-radius: 10vw;
   }
 }
