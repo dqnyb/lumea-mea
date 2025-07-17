@@ -113,17 +113,16 @@ const SantiagoTripPage: React.FC = () => {
             </ul>
             <Echpament currentLang={currentLang} itemDescriptions={translations[currentLang].Santiago.echipament}/>
             <Calendar 
-                currentLang={currentLang}
-                buttonCount={translations[currentLang].Santiago.allneedtoknow.length} 
-                buttonTexts={translations[currentLang].Santiago.allneedtoknow} 
-                buttonContents={translations[currentLang].Santiago.allneedtoknowContent}
-                buttonImages={[
-                allineedtoknoeimg1,
-                allineedtoknoeimg2,
-                allineedtoknoeimg3,
-                allineedtoknoeimg4,
-                allineedtoknoeimg5
-              ]}/>
+              currentLang={currentLang}
+              buttonCount={translations[currentLang].Santiago.allneedtoknow.length} 
+              buttonTexts={translations[currentLang].Santiago.allneedtoknow} 
+              buttonContents={translations[currentLang].Santiago.allneedtoknowContent}
+              buttonImages={
+                isMobile
+                  ? [allineedtoknoeimg1, allineedtoknoeimg2mob, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+                  : [allineedtoknoeimg1, allineedtoknoeimg2, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+              }
+            />
               <h1 className='trippage-nevoie-title'>{translations[currentLang].Santiago.nevoietitle}</h1>
               <div 
                 className='trippage-nevoie-descritpion' 

@@ -127,17 +127,16 @@ const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang })
             </ul>
             <Echpament currentLang={currentLang} itemDescriptions={translations[currentLang].Maroc.echipament}/>
             <Calendar 
-                currentLang={currentLang}
-                buttonCount={translations[currentLang].Maroc.allneedtoknow.length} 
-                buttonTexts={translations[currentLang].Maroc.allneedtoknow} 
-                buttonContents={translations[currentLang].Maroc.allneedtoknowContent}
-                buttonImages={[
-                allineedtoknoeimg1,
-                allineedtoknoeimg2,
-                allineedtoknoeimg3,
-                allineedtoknoeimg4,
-                allineedtoknoeimg5
-              ]}/>
+              currentLang={currentLang}
+              buttonCount={translations[currentLang].Maroc.allneedtoknow.length} 
+              buttonTexts={translations[currentLang].Maroc.allneedtoknow} 
+              buttonContents={translations[currentLang].Maroc.allneedtoknowContent}
+              buttonImages={
+                isMobile
+                  ? [allineedtoknoeimg1, allineedtoknoeimg2mob, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+                  : [allineedtoknoeimg1, allineedtoknoeimg2, allineedtoknoeimg3, allineedtoknoeimg4, allineedtoknoeimg5]
+              }
+            />
               {/* <button 
                 className="trippage-download-button"
                 onClick={handleDownloadPdf}

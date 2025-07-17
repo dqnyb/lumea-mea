@@ -4,6 +4,7 @@ import perioada from "../assets/perioada.svg";
 import durata from "../assets/durata.svg";
 import dificulatete from "../assets/dificultate.svg";
 import pret from "../assets/pret.svg";
+import { useNavigate } from 'react-router-dom';
 
 interface AboutTripProps {
   currentLang: 'ro' | 'ru';
@@ -36,6 +37,7 @@ const translations = {
 };
 
 const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, difficulty, price, setLiveChatOpen }) => {
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (setLiveChatOpen) {
@@ -114,7 +116,7 @@ const AboutTrip: React.FC<AboutTripProps> = ({ currentLang, period, duration, di
               {remainingText}{' '}
               <span 
                 onClick={() => {
-                  window.location.href = '/reguli';
+                  navigate('/reguli');
                 }}
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
               >
