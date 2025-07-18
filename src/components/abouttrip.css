@@ -73,11 +73,11 @@
 
 .abouttrip-description {
   font-family: "Manrope", sans-serif;
-  font-size: 1vw;
-  font-weight: 300;
-  color: #666666;
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: #2C2C2C;
   text-align: center;
-  max-width: 60vw;
+  max-width: 80vw;
   line-height: 1.4;
   margin: 0;
 }
@@ -145,7 +145,7 @@
   }
 
   .abouttrip-list-item-value {
-    font-size: 3vw;
+    font-size: 4vw;
     text-align: center;
   }
 
@@ -158,9 +158,12 @@
   }
 
   .abouttrip-description {
-    font-size: 2.8vw;
+    font-size: 4vw;
     max-width: 90vw;
     margin: 0 auto;
     text-align: center;
+  }
+  .abouttrip-description {
+    font-size: 4vw;
   }
 }

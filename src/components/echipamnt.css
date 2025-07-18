@@ -55,7 +55,7 @@
 
 .echipamnt-item-title {
   font-family: "Manrope", sans-serif;
-  font-size: 1.2vw;
+  font-size: 1.5vw;
   font-weight: 500;
   color: #2C2C2C;
   text-align: left;
@@ -64,7 +64,7 @@
 
 .echipamnt-item-description {
   font-family: "Manrope", sans-serif;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 400;
   color: #2C2C2C;
   text-align: left;
@@ -92,7 +92,7 @@
   }
   
   .echipamnt-item-title {
-    font-size: 5vw;
+    font-size: 6vw;
   }
   
   .echipamnt-item-description {

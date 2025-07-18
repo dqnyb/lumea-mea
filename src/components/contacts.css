@@ -19,7 +19,7 @@
 .contacts-text {
   font-family: "Manrope", sans-serif;
   font-size: 1.2vw;
-  font-weight: 300;
+  font-weight: 500;
   color: #2C2C2C;
   max-width: 60vw;
   line-height: 1.6;
@@ -43,8 +43,8 @@
 
 .contacts-description {
   font-family: "Manrope", sans-serif;
-  font-size: 1.1vw;
-  font-weight: 400;
+  font-size: 1.2vw;
+  font-weight: 500;
   color: #2C2C2C;
   margin: 0;
 }
@@ -88,18 +88,18 @@
     font-size: 7vw;
   }
   .contacts-text {
-    font-size: 3vw;
+    font-size: 4vw;
     max-width: 90vw;
   }
   .contacts-name {
     font-size: 5vw;
   }
   .contacts-description {
-    font-size: 3vw;
+    font-size: 4vw;
   }
   .contacts-number,
   .contacts-email {
-    font-size: 3vw;
+    font-size: 4vw;
   }
   .contacts-image {
     width: 35vw;

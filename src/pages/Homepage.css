@@ -80,7 +80,7 @@
 .homepage-coordinator-message-text {
   color: #00417A;
   font-family: "Manrope", sans-serif;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 500;
   text-align: left;
   margin-top: 1.5vw;
@@ -204,7 +204,7 @@
 }
 .homepage-trip-description {
   font-family: "Manrope", sans-serif;
-  font-size: 1vw;
+  font-size: 1.2vw;
   color: #2C2C2C;
   position: relative;
   left: 50%;
@@ -212,6 +212,7 @@
   text-align: center;
   margin-top: 2vw;
   font-weight: 300;
+  width: 90vw;
 }
 
 .homepage-trip-button {
@@ -267,17 +268,19 @@
 }
 
 .gallery-list {
-  margin-left: -0.5vw;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 1vw;
-  padding: 0;
-  list-style: none;
-  width: 100%;
   align-items: center;
 }
 
 .gallery-list li {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   display: flex;
   flex-direction: row;
   gap: 1vw;
@@ -286,10 +289,8 @@
 }
 
 .gallery-list li img {
-  object-fit: cover;
-  border-radius: 0.5vw;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+   width: auto;
+  height: 21vw;
 }
 
 
@@ -479,12 +480,12 @@
 
 .homepage-partners-title {
   text-align: center;
-  font-size: 2vw;
+  font-size: 4vw;
 }
 
 .homepage-partners-description{
   font-family: "Manrope", sans-serif;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 500;
   color: #2C2C2C;
   margin: 0;
@@ -526,11 +527,12 @@
 }
 
 .homepage-partners li img {
-  max-width: 15vw;
+  width: 12vw;
   height: auto;
   object-fit: contain;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 2vw;
 }
 
 .homepage-partners li img:hover {
@@ -545,15 +547,24 @@
   }
   
   .homepage-partners li img {
-    max-width: 25vw;
-  }
+  width: 24vw;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2vw;
+}
   .homepage-partners-title {
     text-align: center;
     font-size: 6vw;
   }
   .homepage-partners-description {
-    font-size: 3vw;
-    
+    font-size: 3vw; 
+  }
+  .homepage-aboutus-list-item-icon {
+    width: 10vw;
+    height: 10vw;
+    margin-bottom: 1vw;
   }
 }
 
@@ -606,7 +617,7 @@
   }
 
   .homepage-trip-description {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .homepage-trip-button {
@@ -619,12 +630,12 @@
   }
 
   .homepage-aboutus-description {
-    font-size: 3vw;
+    font-size: 4vw;
     width: 90vw;
   }
 
   .homepage-aboutus-list-text {
-    font-size: 2.5vw;
+    font-size: 4vw;
   }
 
   .homepage-other-content {
@@ -653,7 +664,7 @@
     gap: 3vw;
   }
   .homepage-aboutus-list {
-    margin-left: 23vw;
+    margin-left: 17vw;
   }
   .homepage-second-bg {
     display: none;
@@ -669,7 +680,7 @@
     width: 100%;
   }
   .homepage-coordinator-message-text {
-    font-size: 3vw;
+    font-size: 4vw;
   }
   .homepage-coordinator-message-img {
     height: 5vw;

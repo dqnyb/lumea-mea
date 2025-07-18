@@ -16,6 +16,8 @@ import whyus from "../assets/Dece sa calatoresti cu noi.jpg"
 import Contacts from "../components/contacts"
 import Footer from "../components/footer"
 import whyusru from "../assets/whyusru.jpg"
+import whyusrumob from "../assets/Dece sa calatoresti cu noi mobile ru.jpg"
+import whyusromob from "../assets/Dece sa calatoresti cu noi mobile ro.jpg"
 import secondbg from "../assets/pexels-zhicheng-zhang-312594413-15193338 (2).png"
 import gallery1 from "../assets/galerie/image.jpg"
 import gallery2 from "../assets/galerie/image (1).jpg"
@@ -47,6 +49,7 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
   const [liveChatOpen, setLiveChatOpen] = useState(false);
   const navigate = useNavigate(); // Add this line
+  const isMobile = window.innerWidth <= 768;
 
   // Gallery images array for navigation
   const galleryImages = [
@@ -256,7 +259,14 @@ const HomePage: React.FC<HomePageProps> = ({ currentLang, setCurrentLang }) => {
       <div className='homepage-other-content'>
         <img src={harta} className='homepage-other-content-harta'/>
         <h1 className='homepage-whyus-text'>{translations[currentLang].homepage.whyus}</h1>
-        <img src={currentLang === 'ru' ? whyusru : whyus} className='homepage-whyus-img' />
+        <img
+          src={
+            isMobile
+              ? (currentLang === 'ru' ? whyusrumob : whyusromob)
+              : (currentLang === 'ru' ? whyusru : whyus)
+          }
+          className='homepage-whyus-img'
+        />
         <div className='homepage-coordinator-message'>
           <img src={coordonatorsus} className='homepage-coordinator-message-img' />
             <div 
