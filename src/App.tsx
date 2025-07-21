@@ -10,6 +10,7 @@ import Santiago from "./pages/SantiagoTripPage"
 import InWork from "./pages/inwork"
 import FAQ from './pages/FAQ'
 import Reguli from './pages/reguli'
+import CookieConsent from './components/cookie';
 
 function App() {
   const [currentLang, setCurrentLang] = useState<'ro' | 'ru'>(() => {
@@ -19,6 +20,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem('lang', currentLang);
   }, [currentLang]);
+
+  const handleCookieAccept = () => {
+    console.log('User accepted cookies');
+    // You can add analytics or other tracking here if needed
+  };
+
+  const handleCookieReject = () => {
+    console.log('User rejected cookies');
+    // Handle rejection - maybe disable certain features
+  };
 
   return (
     <Router>
@@ -33,6 +44,11 @@ function App() {
         <Route path="/reguli" element={<Reguli currentLang={currentLang} setCurrentLang={setCurrentLang} />} />
         <Route path="/inwork" element={<InWork currentLang={currentLang} setCurrentLang={setCurrentLang} />} />
       </Routes>
+
+      <CookieConsent 
+        onAccept={handleCookieAccept}
+        onReject={handleCookieReject}
+      />
     </Router>
   )
 }
