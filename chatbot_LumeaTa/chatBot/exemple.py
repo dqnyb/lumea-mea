@@ -644,45 +644,45 @@ def aplica_filtrele(tururi_text, preferinte , language):
     if language == "RO":
         if "Nu exist" in text_anotimp:
             print("Nu există preferință legată de anotimp")
-            not_preferinta += "Nu există preferință legată de anotimp,\n"
+            not_preferinta += "Nu există tururi disponibile pentru anotimpul selectat,\n"
             counter -= 1
         if "Nu exist" in text_regiune:
             print("Nu există preferință legată de regiune")
-            not_preferinta += "Nu există preferință legată de regiune,\n"
+            not_preferinta += "Nu există tururi disponibile pentru regiunea selectată,\n"
             counter -= 1
         if "Nu exist" in text_buget:
             print("Nu există preferință legată de buget")
-            not_preferinta += "Nu există preferință legată de buget,\n"
+            not_preferinta += "Nu există tururi disponibile pentru bugetul selectat,\n"
             counter -= 1
         if "Nu exist" in text_dificultate:
             print("Nu există preferință legată de dificultate")
-            not_preferinta += "Nu există preferință legată de dificultate,\n"
+            not_preferinta += "Nu există tururi disponibile pentru nivelul de dificultate selectat,\n"
             counter -= 1
         if "Nu exist" in text_durata:
             print("Nu există preferință legată de durată\n\n")
-            not_preferinta += "Nu există preferință legată de durată,\n"
+            not_preferinta += "Nu există tururi disponibile pentru durata selectată,\n"
             counter -= 1
 
     elif language == "RU":
         if "Nu exist" in text_anotimp:
             print("Нет предпочтения по времени года")
-            not_preferinta += "Нет предпочтения по времени года,\n"
+            not_preferinta += "Нет туров, соответствующих выбранному времени года,\n"
             counter -= 1
         if "Nu exist" in text_regiune:
             print("Нет предпочтения по региону")
-            not_preferinta += "Нет предпочтения по региону,\n"
+            not_preferinta += "Нет туров, соответствующих выбранному региону,\n"
             counter -= 1
         if "Nu exist" in text_buget:
             print("Нет предпочтения по бюджету")
-            not_preferinta += "Нет предпочтения по бюджету,\n"
+            not_preferinta += "Нет туров, соответствующих выбранному бюджету,\n"
             counter -= 1
         if "Nu exist" in text_dificultate:
             print("Нет предпочтения по сложности")
-            not_preferinta += "Нет предпочтения по сложности,\n"
+            not_preferinta += "Нет туров, соответствующих выбранной сложности,\n"
             counter -= 1
         if "Nu exist" in text_durata:
             print("Нет предпочтения по длительности\n\n")
-            not_preferinta += "Нет предпочтения по длительности,\n"
+            not_preferinta += "Нет туров, соответствующих выбранной длительности,\n"
             counter -= 1
 
     tururi_formatate = []
