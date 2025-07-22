@@ -22,7 +22,7 @@
   z-index: 9999;
   max-width: 500px;
   width: calc(100% - 40px);
-  padding: 2vw;
+  padding: 1.5vw; /* Reduced from 2vw */
   animation: slideUp 0.3s ease-out;
   border: 0.1vw solid #00417A;
   text-align: center;
@@ -30,30 +30,30 @@
 
 /* Text Section */
 .cookie-text {
-  margin-bottom: 2vw;
+  margin-bottom: 1.5vw; /* Reduced from 2vw */
 }
 
 .cookie-title {
   font-family: "Raleway", sans-serif;
-  font-size: 1.8vw;
+  font-size: 1.6vw; /* Reduced from 1.8vw */
   font-weight: 700;
   color: #00417A;
-  margin: 0 0 1vw 0;
+  margin: 0 0 0.8vw 0; /* Reduced from 1vw */
 }
 
 .cookie-message {
   font-family: "Manrope", sans-serif;
-  font-size: 1.1vw;
+  font-size: 1vw; /* Reduced from 1.1vw */
   font-weight: 400;
   color: #2C2C2C;
-  line-height: 1.6;
-  margin: 0 0 1.5vw 0;
+  line-height: 1.4; /* Reduced from 1.6 */
+  margin: 0 0 1.2vw 0; /* Reduced from 1.5vw */
 }
 
 /* Buttons Section */
 .cookie-buttons {
   display: flex;
-  gap: 1vw;
+  gap: 0.8vw; /* Reduced from 1vw */
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -62,12 +62,12 @@
 .cookie-btn {
   font-family: "Raleway", sans-serif;
   border: none;
-  border-radius: 0.7vw;
-  font-size: 1.1vw;
+  border-radius: 0.6vw; /* Reduced from 0.7vw */
+  font-size: 1vw; /* Reduced from 1.1vw */
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 1vw 2vw;
+  padding: 0.8vw 1.8vw; /* Reduced from 1vw 2vw */
   text-decoration: none;
 }
 
@@ -96,14 +96,9 @@
 .cookie-btn-learn {
   background: transparent;
   color: #00417A;
-  font-size: 1vw;
+  font-size: 0.9vw; /* Reduced from 1vw */
   text-decoration: underline;
-  padding: 0.5vw 1vw;
-}
-
-.cookie-btn-learn:hover {
-  color: #003366;
-  text-decoration: none;
+  padding: 0.4vw 0.8vw; /* Reduced from 0.5vw 1vw */
 }
 
 /* Mobile Responsive */
@@ -111,35 +106,35 @@
   .cookie-container {
     bottom: 20px;
     width: calc(100% - 32px);
-    padding: 4vw;
+    padding: 3vw; /* Reduced from 4vw */
     border-radius: 2vw;
   }
   
   .cookie-title {
-    font-size: 5vw;
-    margin-bottom: 2vw;
+    font-size: 4.5vw; /* Reduced from 5vw */
+    margin-bottom: 1.5vw; /* Reduced from 2vw */
   }
   
   .cookie-message {
-    font-size: 3.5vw;
-    margin-bottom: 4vw;
+    font-size: 3.2vw; /* Reduced from 3.5vw */
+    margin-bottom: 3vw; /* Reduced from 4vw */
   }
   
   .cookie-buttons {
     flex-direction: column;
-    gap: 3vw;
+    gap: 2.5vw; /* Reduced from 3vw */
   }
   
   .cookie-btn {
-    font-size: 4vw;
-    padding: 3vw 6vw;
+    font-size: 3.5vw; /* Reduced from 4vw */
+    padding: 2.5vw 5vw; /* Reduced from 3vw 6vw */
     width: 70%;
   }
   
   .cookie-btn-learn {
-    font-size: 3vw;
+    font-size: 2.7vw; /* Reduced from 3vw */
     width: auto;
-    padding: 2vw 4vw;
+    padding: 1.5vw 3vw; /* Reduced from 2vw 4vw */
   }
 }
 
@@ -147,17 +142,17 @@
   .cookie-container {
     bottom: 16px;
     width: calc(100% - 24px);
-    padding: 6vw;
+    padding: 5vw; /* Reduced from 6vw */
   }
   
   .cookie-buttons {
-    gap: 4vw;
+    gap: 3vw; /* Reduced from 4vw */
   }
   
   .cookie-btn {
     width: 80%;
-    font-size: 4.5vw;
-    padding: 4vw 8vw;
+    font-size: 4vw; /* Reduced from 4.5vw */
+    padding: 3.5vw 7vw; /* Reduced from 4vw 8vw */
   }
 }
 
