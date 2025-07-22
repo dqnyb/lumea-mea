@@ -23,7 +23,10 @@ import requests
 
 load_dotenv()
 
-
+preferinte = {}
+preferinte["tururi"] = ""
+preferinte["comanda"] = ""
+preferinte["tur_ales"] = ""
 TELEGRAM = os.getenv("TELEGRAM_API_KEY")
 CHAT_ID = os.getenv("CHAT_ID")
 
@@ -59,8 +62,6 @@ def traduce_preferinte(preferinte):
 
     return preferinte_traduse
 
-
-
 def log_message(sender, message):
 
     base_dir = os.path.expanduser("../logs")
@@ -84,7 +85,7 @@ def log_message(sender, message):
 
 
 
-def chat_with_openai(messages, temperature=0.7, max_tokens=100):
+def chat_with_openai(messages, temperature=0.7, max_tokens=100): 
     response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
@@ -130,6 +131,21 @@ def check_rag(user_response: str) -> str:
         return "EVENIMENTE"
     if any(word in text for word in keywords_evenimente_ru):
         return "EVENIMENTE"
+
+    keywords_tur = [
+        # Română
+        "tur", "tururi", "excursie", "excursii", "traseu", "traseuri", "călătorie", "călătorii",
+        "plimbare", "vizită", "vizite", "itinerar", "drumeție", "drumeții",
+        
+        # Rusă
+        "тур", "туры", "экскурсия", "экскурсии", "поездка", "поездки",
+        "маршрут", "маршруты", "путешествие", "путешествия", "прогулка", "визит", "визиты", "дорожка"
+    ]
+
+    # Dacă mesajul conține unul din aceste cuvinte → considerăm intenția ca fiind DA
+    if any(kw in text for kw in keywords_tur):
+        return "DA"
+
     
     prompt = (
         f"Clasifică intenția utilizatorului pe baza răspunsului: \"{user_response}\"\n"
@@ -471,33 +487,52 @@ def interests():
     response = user_data.get("message", "prieten")
 
     language_saved = user_data.get("language")
-
+    preferinte["comanda"] = "NIMIC"
     check_response_rag = check_rag(response)
-
+    print("check_response_rag = ", check_response_rag)
     if check_response_rag == "REZERVA":
-        
+        preferinte["comanda"] = "rezerva"
         if language_saved == "RO":
-            log_message("USER", "vrea sa continuie cu rezervarea locului")
-            reply = (
-                "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n"
-                "- Nume complet\n"
-                "- Număr de telefon\n"
-                "- Adresă de email\n"
-                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)"
-            )
+            log_message("USER","Doreste sa continue cu 'preferintele' ca sa aleaga un tur potrivit")
+            question = "Alege te rog o destinație turistică pentru rezervare?"
+            options = ["România", "Europa", "Turcia", "Toate"]
         elif language_saved == "RU":
-            log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с бронированием места")
-            reply = (
-                "Отлично! 😊 Чтобы продолжить бронирование, пожалуйста, укажите следующую информацию:\n"
-                "- Полное имя\n"
-                        "- Номер телефона\n"
-                        "- Адрес электронной почты\n"
-                        "- Любые дополнительные детали (например, количество людей, предпочитаемые даты)"
-                    )
-            
+            log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с «предпочтениями», чтобы выбрать подходящий тур")
+            question = "Выберите, пожалуйста, туристическое направление?"
+            options = ["Румыния", "Европа", "Турция", "Все"]
+        else:
+            return jsonify({"error": "Limba necunoscută"}), 400
+
+        message = generate_ask_interests_message(question, options, language_saved)
+        print(message)
         ask_interests = {
-            "full_message": reply
+            "question": question,
+            "options": options,
+            "full_message": message
         }
+
+        # if language_saved == "RO":
+        #     log_message("USER", "vrea sa continuie cu rezervarea locului")
+        #     reply = (
+        #         "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n"
+        #         "- Nume complet\n"
+        #         "- Număr de telefon\n"
+        #         "- Adresă de email\n"
+        #         "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)"
+        #     )
+        # elif language_saved == "RU":
+        #     log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с бронированием места")
+        #     reply = (
+        #         "Отлично! 😊 Чтобы продолжить бронирование, пожалуйста, укажите следующую информацию:\n"
+        #         "- Полное имя\n"
+        #                 "- Номер телефона\n"
+        #                 "- Адрес электронной почты\n"
+        #                 "- Любые дополнительные детали (например, количество людей, предпочитаемые даты)"
+        #             )
+            
+        # ask_interests = {
+        #     "full_message": reply
+        # }
             
         return jsonify({"ask_interests": ask_interests})
 
@@ -561,7 +596,7 @@ def interests():
     return jsonify({"ask_interests": ask_interests})
 
 
-def create_question_response(prompt, temperature=0.8, max_tokens=120):
+def create_question_response(prompt, temperature=0.8, max_tokens=300):
     messages = [{"role": "system", "content": prompt}]
     try:
         reply = chat_with_openai(messages, temperature=temperature, max_tokens=max_tokens)
@@ -1389,12 +1424,20 @@ def chat():
             df_lang = read_csv(language)
 
         tururi_text = proccess_tururi(df_lang, language)
+        preferinte['tururi'] = tururi_text
         tururi_formatate = aplica_filtrele(tururi_text,preferinte , language)
         reply_message = "\n".join(tururi_formatate)
+        
         if language == "RO":
-            reply_message += "\n <br> Mai multe detalii puteti vedea pe site-ul nostru! <br><br>Doresti sa rezervi un loc? Da / Nu\n"
+            if preferinte["comanda"] == "rezerva":
+                reply_message += "\n <br> Mai multe detalii puteti vedea pe site-ul nostru! <br><br><strong>Alege te rog denumirea turului dorit pentru a continua cu rezervarea (din lista de mai sus)</strong>\n"
+            else:
+                reply_message += "\n <br> Mai multe detalii puteti vedea pe site-ul nostru! <br><br>Doresti sa rezervi un loc? Da / Nu\n"
         elif language == "RU":
-            reply_message += "\n <br> Подробнее вы можете узнать на нашем сайте! <br><br>Хотите забронировать место? Да / Нет\n"
+            if preferinte["comanda"] == "rezerva":
+                reply_message += "\n <br> Подробнее вы можете узнать на нашем сайте! <br><br><strong>Выберите, пожалуйста, название тура для продолжения с бронированием (из списка выше)</strong>\n"
+            else:
+                reply_message += "\n <br> Подробнее вы можете узнать на нашем сайте! <br><br>Хотите забронировать место? Да / Нет\n"
         
         return jsonify({"reply": reply_message})
     
@@ -1462,16 +1505,38 @@ def chat():
             )
         return jsonify({"reply": full_message})
 
+def check_response_contact(user_response, language="RO"):
 
-def check_response_contact(user_response):
-    system_prompt = (
-        "Răspunde strict cu un singur cuvânt: DA, NU sau ALTCEVA. "
-        "Răspunde cu DA dacă utilizatorul exprimă clar intenția de a rezerva, participa, aplica, continua, "
-        "trimite date personale sau completa un formular. "
-        "Răspunde cu NU dacă răspunsul este clar negativ, dezinteresat sau refuză. "
-        "Răspunde cu ALTCEVA dacă răspunsul este vag, confuz, nu este clar afirmativ sau negativ sau nu are legătură cu subiectul. "
-        "Nu adăuga alte explicații."
-    )
+    if language.upper() == "RU":
+        system_prompt = (
+            "Проанализируй сообщение пользователя и ответь СТРОГО одним словом: DA, NU или ALTCEVA.\n\n"
+            
+            "Ответь DA, если сообщение выражает положительный интерес, желание, любопытство, намерение или готовность "
+            "участвовать, забронировать, заказать, путешествовать, подать заявку или продолжить разговор "
+            "в направлении сотрудничества, тура, экскурсии или туристического предложения. "
+            "Также включи случаи, когда пользователь не уверен, но открыт к предложению "
+            "(например: 'не знаю точно', 'я бы хотел что-то', 'заинтересован', 'хочу детали', 'что посоветуешь'). "
+            "Также включи случаи, когда пользователь пишет только 'Да' или 'Хочу' — это считается ответом DA.\n\n"
+            
+            "Ответь NU, если сообщение выражает явное отсутствие интереса, отказ, отрицание или отторжение.\n\n"
+            
+            "Ответь ALTCEVA, если сообщение не содержит четких признаков интереса или безразличия, является полностью неоднозначным "
+            "или не относится к туризму, путешествиям или туристическим услугам (например, вопросы о футболе, политике и т.п.).\n\n"
+            
+            "НЕ добавляй никаких других слов, объяснений или символов — ответь строго: DA, NU или ALTCEVA."
+        )
+    else:
+        system_prompt = (
+            "Analizează mesajul utilizatorului și răspunde STRICT cu un singur cuvânt: DA, NU sau ALTCEVA.\n\n"
+            "Răspunde cu DA dacă mesajul exprimă interes pozitiv, dorință, curiozitate, intenție sau deschidere spre a participa, "
+            "rezerva, comanda, călători, aplica sau continua conversația în direcția unei colaborări, excursii, tururi sau oferte turistice. "
+            "Include și cazurile în care utilizatorul pare nesigur dar deschis (ex: 'nu știu sigur', 'aș vrea ceva', 'sunt interesat', 'vreau detalii', 'ce recomanzi'). "
+            "Tot ce sugerează o potențială implicare sau un interes legat de turism — se consideră DA.\n\n"
+            "Răspunde cu NU dacă mesajul exprimă lipsă de interes, refuz, negație clară sau respingere.\n\n"
+            "Răspunde cu ALTCEVA dacă mesajul nu conține niciun indiciu clar de interes sau dezinteres, este complet ambiguu, "
+            "sau subiectul nu are legătură cu tururi, călătorii sau servicii turistice (ex: întrebări despre fotbal, politică etc).\n\n"
+            "NU adăuga alte cuvinte, explicații sau caractere — răspunde strict cu: DA, NU sau ALTCEVA."
+        )
 
     messages = [
         {"role": "system", "content": system_prompt},
@@ -1487,11 +1552,23 @@ def check_response_contact(user_response):
         elif answer == "NU":
             return "NU"
         else:
+            affirmatives = ["da", "sigur", "bine", "desigur", "vreau", "ok", "okey", "vreau să completez", "da, vreau",
+                            "хочу", "да", "интересует", "забронировать", "записаться", "путешествовать", "интересно"]
+            negatives = ["nu", "nici", "deloc", "refuz", "nu vreau", "nu particip",
+                        "нет", "не хочу", "не интересно", "отказ", "не буду"]
+            user_lower = user_response.lower()
+            if any(word in user_lower for word in affirmatives):
+                return "DA"
+            if any(word in user_lower for word in negatives):
+                return "NU"
             return "ALTCEVA"
+
     except Exception as e:
         print(f"[EROARE check_response_contact]: {e}")
-        affirmatives = ["da", "sigur", "bine", "desigur", "vreau", "ok", "okey", "vreau să completez", "da, vreau"]
-        negatives = ["nu", "nici", "deloc", "refuz", "nu vreau", "nu particip"]
+        affirmatives = ["da", "sigur", "bine", "desigur", "vreau", "ok", "okey", "vreau să completez", "da, vreau",
+                        "хочу", "да", "интересует", "забронировать", "записаться", "путешествовать", "интересно"]
+        negatives = ["nu", "nici", "deloc", "refuz", "nu vreau", "nu particip",
+                     "нет", "не хочу", "не интересно", "отказ", "не буду"]
         user_lower = user_response.lower()
         if any(word in user_lower for word in affirmatives):
             return "DA"
@@ -1499,14 +1576,61 @@ def check_response_contact(user_response):
             return "NU"
         return "ALTCEVA"
 
+def check_tururi(message, tururi_text, language="RO"):
+    prompt = f"""
+Ești un asistent care ajută utilizatorii să identifice dacă într-un mesaj este menționat un tur turistic valid sau ceva asemănător.
+
+Ai mai jos o listă de tururi turistice disponibile:
+{tururi_text}
+
+📩 Utilizatorul a spus:
+"{message}"
+
+Clasifică mesajul în UNA dintre categoriile de mai jos, răspunzând DOAR cu un singur cuvânt:
+
+- DA: dacă mesajul conține exact sau aproape exact numele unui tur, sau e clar că face referire la un tur din listă (chiar dacă nu e scris corect).
+- NU: dacă mesajul este vag dar pare legat de tururi (de exemplu: „Ce tururi aveți?”, „Ce recomandați?” etc), fără să menționeze un tur anume.
+- ALTCEVA: dacă mesajul nu pare deloc legat de tururi sau e despre alt subiect.
+
+⚠️ Nu adăuga explicații. Răspunde DOAR cu: DA, NU sau ALTCEVA.
+"""
+    messages = [{"role": "system", "content": prompt}]
+    return chat_with_openai(messages).strip().upper()
 
 
-@app.route("/exemple", methods=["POST"])
-def exemple():
+def check_tururi_name(message, tururi_text, language="RO"):
+    prompt = (
+        f"Lista de tururi disponibile este:\n"
+        f"{', '.join(tururi_text)}\n\n"
+        f"Mesajul utilizatorului este: '{message}'\n\n"
+        f"Scopul tău este să identifici titlul exact al unui tur din listă, așa cum apare în listă, fără să adaugi sau să omiți nimic.\n\n"
+        f"🛑 Răspunde DOAR cu unul dintre titlurile exacte din listă — fără ghilimele, fără explicații, fără caractere adiționale.\n"
+        f"Dacă NU poți determina cu certitudine unul dintre titluri, răspunde doar cu:\nNONE"
+    )
+
+    # Mesajele pentru AI (tip OpenAI/GPT)
+    messages = [
+        {"role": "system", "content": "Ești un asistent care extrage numele turului dintr-o listă."},
+        {"role": "user", "content": prompt}
+    ]
+
+    raspuns = chat_with_openai(messages).strip()
+
+    if raspuns.upper() == "NONE":
+        return "NONE"
+    return raspuns
+
+
+@app.route("/exemple_1", methods=["POST"])
+def exemple_1():
     data = request.get_json()
     message = data.get("message", "")
     language = data.get("language", "RO")
-    contact = check_response_contact(message)
+    print(f"{preferinte['tururi']}")
+    contact = check_tururi(message,preferinte["tururi"],language)
+    contact_tur = check_tururi_name(message,preferinte["tururi"],language)
+    print(f"contact_tur = {contact_tur}")
+    preferinte["tur_ales"] = contact_tur
     print(message)
     print(f"contact = {contact}")
 
@@ -1515,19 +1639,19 @@ def exemple():
             log_message("USER", "vrea sa continuie cu rezervarea locului")
             reply = (
                 "Perfect! 😊 Pentru a continua cu rezervarea, te rog să-mi lași următoarele informații:\n"
-                "- Nume complet\n"
-                "- Număr de telefon\n"
-                "- Adresă de email\n"
-                "- Orice alte detalii relevante (ex: număr persoane, perioadă preferată)"
+                "<br> - <strong>Nume complet</strong>\n"
+                "<br> - <strong>Număr de telefon</strong>\n"
+                "<br> - <strong>Adresă de email</strong>\n"
+                "<br> - <strong>Orice alte detalii relevante (ex: număr persoane, perioadă preferată)</strong>"
             )
         elif language.upper() == "RU":
             log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с бронированием места")
             reply = (
                 "Отлично! 😊 Чтобы продолжить бронирование, пожалуйста, укажите следующую информацию:\n"
-                "- Полное имя\n"
-                "- Номер телефона\n"
-                "- Адрес электронной почты\n"
-                "- Любые дополнительные детали (например, количество людей, предпочитаемые даты)"
+                "<br> - <strong>Полное имя</strong>\n"
+                "<br> - <strong>Номер телефона</strong>\n"
+                "<br> - <strong>Адрес электронной почты</strong>\n"
+                "<br> - <strong>Любые дополнительные детали (например, количество людей, предпочитаемые даты)</strong>"
             )
         else:
             reply = "Limbă necunoscută. Nu pot continua."
@@ -1536,14 +1660,106 @@ def exemple():
         if language.upper() == "RO":
             log_message("USER", message)
             reply = (
-                "Îți mulțumesc pentru conversație! 😊 Îți doresc o zi frumoasă!\n"
-                "Dacă mai ai întrebări, sunt aici oricând !!!"
+                "⚠️ <strong>Este necesar să alegi o destinație turistică</strong> pentru a putea continua cu rezervarea.<br><br>"
+                "📍 Te rog selectează una dintre <strong>destinațiile din lista de mai sus</strong>."
             )
         elif language.upper() == "RU":
             log_message("ПОЛЬЗОВАТЕЛЬ", message)
             reply = (
-                "Спасибо за разговор! 😊 Желаю вам хорошего дня!\n"
-                "Если появятся вопросы — я всегда на связи !!!"
+                "⚠️ <strong>Необходимо выбрать туристическое направление</strong>, чтобы продолжить бронирование.<br><br>"
+                "📍 Пожалуйста, выберите один из <strong>вариантов из списка выше</strong>."
+            )
+        else:
+            reply = (
+                "🙏 Mulțumim pentru mesaj!<br><br>"
+                "📌 Dacă vrei să continui cu o rezervare, alege o destinație turistică din lista afișată."
+            )
+
+    else:  # contact == "ALTCEVA"
+        print(f"message = {message}")
+        if language.upper() == "RO":
+            system_prompt = (
+                "Ești un asistent virtual prietenos, empatic și respectuos. "
+                "Analizează mesajul utilizatorului și oferă un răspuns scurt, natural și cald, adaptat contextului. "
+                "Răspunde doar la ce a spus utilizatorul, fără să pui întrebări suplimentare. "
+                "La finalul răspunsului, adaugă exact acest text, fără modificări:\n"
+                "'<br><br>📌 Alege te rog o <strong>destinație turistică</strong> pentru rezervare – este <strong>obligatoriu</strong> din lista de mai sus.'"
+            )
+        elif language.upper() == "RU":
+            system_prompt = (
+                "Ты дружелюбный, вежливый и внимательный виртуальный помощник. "
+                "Проанализируй сообщение пользователя и дай короткий, тёплый и естественный ответ по сути его сообщения. "
+                "Не задавай дополнительных вопросов и не меняй тему. "
+                "В конце обязательно добавь эту фразу, без изменений:\n"
+                "'<br><br>📌 Выберите, пожалуйста, <strong>туристическое направление</strong> для бронирования — это <strong>обязательно</strong> из списка выше.'"
+            )
+        else:
+            system_prompt = (
+                "You are a friendly assistant. Reply politely to the user's message. "
+                "At the end, ask: 'Would you like to proceed with a reservation?'"
+            )
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": message}
+        ]
+
+        reply = chat_with_openai(messages, temperature=0.7, max_tokens=250)
+
+    return jsonify({"ask_name": reply})
+
+@app.route("/exemple", methods=["POST"])
+def exemple():
+    data = request.get_json()
+    message = data.get("message", "")
+    language = data.get("language", "RO")
+    contact = check_response_contact(message,language)
+    print(message)
+    print(f"contact = {contact}")
+
+    if contact == "DA":
+        preferinte["comanda"] = "rezerva"
+        if language == "RO":
+            log_message("USER","Doreste sa continue cu 'preferintele' ca sa aleaga un tur potrivit")
+            question = "Alege te rog o destinație turistică pentru rezervare?"
+            options = ["România", "Europa", "Turcia", "Toate"]
+        elif language == "RU":
+            log_message("ПОЛЬЗОВАТЕЛЬ", "хочет продолжить с «предпочтениями», чтобы выбрать подходящий тур")
+            question = "Выберите, пожалуйста, туристическое направление?"
+            options = ["Румыния", "Европа", "Турция", "Все"]
+        else:
+            return jsonify({"error": "Limba necunoscută"}), 400
+        message = generate_ask_interests_message(question, options, language)
+        message = message + " !!!" 
+        print(message)
+        ask_interests = {
+            "question": question,
+            "options": options,
+            "full_message": message
+        }
+        return jsonify({"reply": ask_interests.get("full_message")})
+
+    elif contact == "NU":
+        if language.upper() == "RO":
+            log_message("USER", message)
+            reply = (
+                "🌟 <strong>Îți mulțumesc din suflet pentru conversație!</strong> 😊<br><br>"
+                "💬 Dacă mai ai întrebări sau vrei să revenim la orice pas, sunt aici pentru tine!<br><br>"
+                "📅 <strong>Ce ai dori să faci în continuare?</strong><br>"
+                "👉 <strong>Alege un tur turistic</strong> 🧭<br>"
+                "👉 <strong>Plasează o comandă</strong> 🛍️<br>"
+                "👉 <strong>Vezi toate evenimentele disponibile</strong> 🎉<br><br>"
+                "✨ <em>Scrie pur și simplu ce alegi, iar eu mă ocup de restul!</em> 🤗"
+            )
+        elif language.upper() == "RU":
+            log_message("ПОЛЬЗОВАТЕЛЬ", message)
+            reply = (
+                "🌟 <strong>Спасибо тебе за общение!</strong> 😊<br><br>"
+                "💬 Если у тебя будут вопросы или захочешь вернуться к какому-либо этапу — я всегда рядом!<br><br>"
+                "📅 <strong>Что бы ты хотел сделать дальше?</strong><br>"
+                "👉 <strong>Выбрать туристический тур</strong> 🧭<br>"
+                "👉 <strong>Сделать заказ</strong> 🛍️<br>"
+                "👉 <strong>Посмотреть все доступные мероприятия</strong> 🎉<br><br>"
+                "✨ <em>Просто напиши, что ты выбираешь — и я всё организую!</em> 🤗"
             )
         else:
             reply = "Mulțumim! Îți dorim o zi frumoasă."
@@ -1551,18 +1767,23 @@ def exemple():
     else:  # contact == "ALTCEVA"
         if language.upper() == "RO":
             system_prompt = (
-                "Ești un asistent virtual politicos și prietenos. "
-                "Analizează mesajul utilizatorului și răspunde într-un mod scurt, empatic și util. "
-                "Răspunde la întrebarea sau mesajul utilizatorului cât mai natural. "
-                "La finalul răspunsului, adaugă întrebarea: "
-                "'Vrei să continuăm cu rezervarea unui loc?'"
+                "Ești un asistent virtual prietenos, empatic și politicos din domeniul turismului. "
+                "Răspunde într-un mod scurt, natural și cald la mesajul utilizatorului, "
+                "doar dacă este legat de turism, excursii, rezervări, destinații sau călătorii. "
+                "Dacă mesajul este în afara acestor teme, oferă un răspuns neutru și revino la subiectul turistic.\n\n"
+                "Nu adresa întrebări. Nu schimba subiectul. Nu menționa alte servicii sau teme. "
+                "Răspunsul tău trebuie să pară empatic, dar centrat strict pe subiectul turismului.\n\n"
+                "La finalul fiecărui răspuns, adaugă exact acest mesaj, fără modificări:\n"
+                "'<br><br><strong>Vrei să continuăm cu rezervarea unui loc?</strong>'"
             )
         elif language.upper() == "RU":
             system_prompt = (
-                "Ты вежливый и дружелюбный виртуальный помощник. "
-                "Проанализируй сообщение пользователя и ответь кратко, с сочувствием и полезно. "
-                "В конце каждого ответа добавляй вопрос: "
-                "'Хотите ли вы продолжить с бронированием?'"
+                "Ты дружелюбный и внимательный виртуальный помощник, работающий в сфере туризма. "
+                "Отвечай коротко, тепло и естественно, только если сообщение связано с путешествиями, экскурсиями, бронированием или туризмом. "
+                "Если сообщение пользователя не связано с этими темами, ответь нейтрально и мягко верни разговор к туризму.\n\n"
+                "Не задавай вопросов. Не отклоняйся от темы. Не упоминай другие сферы или услуги.\n\n"
+                "В конце каждого ответа добавляй точно эту фразу, без изменений:\n"
+                "'<br><br><strong>Хотите ли вы продолжить с бронированием?</strong>'"
             )
         else:
             system_prompt = (
@@ -1781,16 +2002,17 @@ def extrage_si_valideaza_numar(text):
 counter = {"count": 0}
 saved = {"mesaj": "", "numar": ""}
 
-@app.route("/return_message", methods=["POST"])
+@app.route("/return_message", methods=["POST", "GET"])
 def return_message():
     global counter, saved
-
     data = request.get_json()
     message = data.get("message", "")
-    language = data.get("language", "RO")
+    language = data.get("language", "")
+    print(f"language = {language}")
 
     for key, value in preferinte.items():
-        message += f"\n{key.capitalize()}: {value}"
+        if key not in ["tururi", "comanda"]:
+            message += f"\n{key.capitalize()}: {value}"
 
     nr, status = extrage_si_valideaza_numar(message)
     print(f"valid = {status}")
@@ -1822,7 +2044,7 @@ def return_message():
     # Dacă numărul este valid, resetează counter-ul
     counter['count'] = 0
 
-    mesaj_final = f"Mesajul initial : {saved['mesaj']}\nNumar de telefon corect : {saved['numar']}"
+    mesaj_final = f"Mesajul initial : {saved['mesaj']}\nNumar de telefon corect : {saved['numar']} \n"
     log_message("USER", mesaj_final)
 
     url = f"https://api.telegram.org/bot{TELEGRAM}/sendMessage?chat_id={CHAT_ID}&text={mesaj_final}"
@@ -1830,13 +2052,23 @@ def return_message():
 
     if language.upper() == "RO":
         reply = (
-            "Îți mulțumesc pentru ca ai completat formularul! 😊 Îți doresc o zi frumoasă!\n"
-            "Dacă mai ai întrebări, sunt aici oricând !!!"
+            "🌟 <strong>Îți mulțumesc din suflet pentru conversație!</strong> 😊<br><br>"
+            "💬 Dacă mai ai întrebări sau vrei să revenim la orice pas, sunt aici pentru tine!<br><br>"
+            "📅 <strong>Ce ai dori să faci în continuare?</strong><br>"
+            "👉 <strong>Alege un tur turistic</strong> 🧭<br>"
+            "👉 <strong>Plasează o comandă</strong> 🛍️<br>"
+            "👉 <strong>Vezi toate evenimentele disponibile</strong> 🎉<br><br>"
+            "✨ <em>Scrie pur și simplu ce alegi, iar eu mă ocup de restul!</em> 🤗"
         )
     elif language.upper() == "RU":
         reply = (
-            "Спасибо, что заполнили форму! 😊 Желаю вам прекрасного дня!\n"
-            "Если у вас будут вопросы — я всегда на связи!"
+            "🌟 <strong>Спасибо тебе за общение!</strong> 😊<br><br>"
+            "💬 Если у тебя будут вопросы или захочешь вернуться к какому-либо этапу — я всегда рядом!<br><br>"
+            "📅 <strong>Что бы ты хотел сделать дальше?</strong><br>"
+            "👉 <strong>Выбрать туристический тур</strong> 🧭<br>"
+            "👉 <strong>Сделать заказ</strong> 🛍️<br>"
+            "👉 <strong>Посмотреть все доступные мероприятия</strong> 🎉<br><br>"
+            "✨ <em>Просто напиши, что ты выбираешь — и я всё организую!</em> 🤗"
         )
     else:
         reply = "Mulțumim! Îți dorim o zi frumoasă."
@@ -1857,3 +2089,6 @@ def serve(path):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port,debug=True, use_reloader=False)
+
+# if __name__ == "__main__":
+#     app.run(debug=True)

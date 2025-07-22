@@ -36,6 +36,15 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language");
+    if (storedLang) {
+      window.language = storedLang;
+      console.log("Limba restaurată din localStorage:", window.language);
+    } else {
+      console.log("⚠️ Limba nu a fost găsită în localStorage!");
+    }
+  }, []);
 
   // Auto-scroll to bottom when messages change
   const scrollToBottom = () => {
@@ -61,11 +70,43 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
           text: data.ask_name || "Cum te numești?",
           from: "bot",
         };
-        const language = data.language;
-        window.language = language;
+        // const language = data.language;
+        // window.language = language;
+          // localStorage.setItem("language", language);
+        window.language = data.language
+        localStorage.setItem("language", data.language);
         setMessages((prev) => [...prev, botMsg]);
         setUserName(name);
         setOnboardingStep(1);
+      });
+  };
+
+  const exemple_1 = (name: string) => {
+    return fetch("https://lumea-mea.onrender.com/exemple_1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, message , language: window.language}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const botMsg: ChatMessage = {
+          id: Date.now(),
+          text: data.ask_name || "Cum te numești?",
+          from: "bot",
+        };
+        const language = data.language;
+        window.language = language;
+        setMessages((prev) => [...prev, botMsg]);
+        console.log(data.ask_name)
+        if (data.ask_name.includes("Perfect! 😊 Pentru a continua cu rezervarea") || data.ask_name.includes("Отлично! 😊 Чтобы продолжить бронирование, пожалуйста")){
+          setOnboardingStep(9)
+          return;
+        } else if (data.ask_name.includes("Este necesar să alegi o destinație turistică") || data.ask_name.includes("Необходимо выбрать туристическое направление")){
+          setOnboardingStep(10)
+          return;
+        }
+        setUserName(name);
+        setOnboardingStep(10);
       });
   };
 
@@ -73,7 +114,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
     return fetch("https://lumea-mea.onrender.com/interests", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: userName, message: msg, language: window.language }),
+      body: JSON.stringify({ name: userName, message: msg, language: localStorage.getItem("language") }),
     })
       .then(res => res.json())
       .then(data => {
@@ -99,6 +140,8 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
           fullMsg.includes("Acum răspunde te rog dacă vrei să continuăm sau dacă ești interesat de evenimente? Da / Toate evenimentele")
         ) {
           // rămâne pe pasul curent (1)
+        } else if (fullMsg.includes("Alege te rog o destinație turistică") || fullMsg.includes("Выберите, пожалуйста, туристическое направление")) {
+          setOnboardingStep(2);
         } else {
           setOnboardingStep(2);
         }
@@ -242,13 +285,14 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
         if (replyText.includes("!!!")) {
           setOnboardingStep(6);
         } else if (
-          replyText.includes("Mai multe detalii puteti vedea pe site-ul nostru!") ||
           replyText.includes("Doresti sa rezervi un loc? Da / Nu") ||
-          replyText.includes("Подробнее вы можете узнать на нашем сайте!") ||
           replyText.includes("Хотите забронировать место? Да / Нет")
         ) {
           setOnboardingStep(7);
-        } else {
+        } else if (replyText.includes("Alege te rog denumirea turului dorit pentru") || replyText.includes("Выберите, пожалуйста, название тура")) {
+          setOnboardingStep(10);
+        }
+        else {
           setOnboardingStep(8);
         }
       });
@@ -267,12 +311,12 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
         setMessages(prev => [...prev, botMsg]);
   
         if (replyText.includes("!!!")) {
-          setOnboardingStep(8);
+          setOnboardingStep(2);
         } else if (
-          replyText.includes("Perfect! 😊 Pentru a continua cu rezervarea") ||
-          replyText.includes("Отлично! 😊 Чтобы продолжить бронирование")
+          replyText.includes("Îți mulțumesc din suflet pentru conversație!") ||
+          replyText.includes("Спасибо тебе за общение!")
         ) {
-          setOnboardingStep(9);
+          setOnboardingStep(1);
         }
       });
   };
@@ -309,19 +353,20 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
     return fetch("https://lumea-mea.onrender.com/return_message", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: msg, language: window.language }),
+      body: JSON.stringify({ message: msg, language: localStorage.getItem("language") }),
     })
       .then(res => res.json())
       .then(data => {
         const replyText = data.reply || "Răspuns necunoscut.";
         const botMsg: ChatMessage = { id: Date.now(), text: replyText, from: "bot" };
         setMessages(prev => [...prev, botMsg]);
-        console.log(replyText.includes("Numărul introdus nu este valid"))
-        console.log(replyText.includes("Îți mulțumesc pentru ca ai completat formularul!"))
+        console.log('language = ', localStorage.getItem("language"))
+        // console.log(replyText.includes("Numărul introdus nu este valid"))
+        // console.log(replyText.includes("Îți mulțumesc din suflet pentru conversație"))
         if ( replyText.includes("Numărul introdus nu este valid") || replyText.includes("Введённый номер недействителен") ) {
           setOnboardingStep(9);
-        } else if (replyText.includes("Îți mulțumesc pentru ca ai completat formularul!")){
-          setOnboardingStep(8);
+        } else if (replyText.includes("Îți mulțumesc din suflet pentru conversație") || replyText.includes("Спасибо тебе за общение!")){
+          setOnboardingStep(1);
         } else {
           setOnboardingStep(8);
         }
@@ -369,6 +414,9 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
           break;
         case 9:
           await sendReturnMessageRequest(message);
+          break;
+        case 10:
+          await exemple_1(message);
           break;
         default:
           // fallback chat simplu
@@ -432,7 +480,7 @@ const LiveChat: React.FC<LiveChatProps> = ({ open: controlledOpen, setOpen: setC
       setVisible(true);
       if (messages.length === 0 && onboardingStep === 0) {
         setLoading(true);
-        fetch("http://127.0.0.1:5000/language")
+        fetch("https://lumea-mea.onrender.com/language")
           .then((res) => res.json())
           .then((data) => {
             // window.language = data.language || "RO";
