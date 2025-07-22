@@ -172,7 +172,7 @@
 }
 
 .trippage-price {
-  font-size: 2vw;
+  font-size: 2.5vw;
   color: #2C2C2C;
   font-family: "Manrope", sans-serif;
 }
@@ -268,7 +268,7 @@
 @media (max-width: 768px) {
   .trippage-atentie-title {
   font-family: "Raleway", sans-serif;
-  font-size: 4.5vw;
+  font-size: 6vw;
   font-weight: 700;
   color: #ff4901;
   margin: 0 auto;
@@ -280,7 +280,7 @@
 
 .trippage-atentie-description {
   font-family: "Manrope", sans-serif;
-  font-size: 3.5vw;
+  font-size: 4vw;
   color: #2C2C2C;
   margin: 0 auto;
   width: 70vw;
@@ -336,7 +336,7 @@
   margin-right: 0vw; /* Small space between first and second */
 }
   .trippage-price {
-    font-size: 6vw;
+    font-size: 5vw;
   }
   .trippage-info-list-item img {
     width: 90vw; 

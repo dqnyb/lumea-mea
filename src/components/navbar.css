@@ -203,13 +203,166 @@
     padding: 1vw 3vw;
   }
 }
+
+/* Hide desktop navbar on mobile */
 @media (max-width: 768px) {
-  .language-button {
-    font-size: 5vw;
-    padding: 2vw 5vw;
-    border-radius: 2vw;
+  .desktop-navbar {
+    display: none;
   }
 }
+
+/* Hide mobile navbar on desktop */
+.mobile-navbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-navbar {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 0.2vw solid #00417A;
+    box-shadow: none; /* Removed the shadow */
+    z-index: 1000;
+    padding: 1.5vw 0.5vw;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 15vw;
+    width: 100%;
+    margin-top: 2vw;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #00417A;
+    transition: all 0.3s ease;
+    padding: 0.5vw;
+    border-radius: 1vw;
+    flex: 1;
+    max-width: 16vw;
+  }
+
+  .mobile-nav-item:hover,
+  .mobile-nav-item.active {
+    background-color: rgba(0, 65, 122, 0.1);
+    transform: translateY(0.2vw); /* Changed direction for top navbar */
+  }
+
+  .mobile-nav-icon {
+    width: 5vw;
+    height: 5vw;
+    margin-bottom: 0.5vw;
+    filter: brightness(0) saturate(100%) invert(17%) sepia(93%) saturate(1234%) hue-rotate(197deg) brightness(93%) contrast(101%);
+  }
+
+  .mobile-nav-text {
+    font-size: 2.2vw;
+    font-weight: 500;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .mobile-language-switcher {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    max-width: 16vw;
+  }
+
+  .mobile-language-button {
+    background: #00417A;
+    color: white;
+    border: none;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 2.2vw;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .mobile-language-button:hover {
+    background: #003366;
+    transform: translateY(0.2vw); /* Changed direction */
+  }
+
+  .mobile-language-dropdown {
+    position: absolute;
+    top: 100%; /* Changed from bottom: 100% */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 0.2vw solid #00417A;
+    border-radius: 1vw;
+    box-shadow: 0 0.5vw 1vw rgba(0, 65, 122, 0.15);
+    margin-top: 1vw; /* Changed from margin-bottom */
+    min-width: 12vw;
+    z-index: 1001;
+  }
+
+  .mobile-language-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 1.5vw 2vw;
+    border: none;
+    background: none;
+    color: #00417A;
+    font-size: 2.2vw;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+  }
+
+  .mobile-language-dropdown button:first-child {
+    border-bottom: 0.1vw solid #eee;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+  }
+
+  .mobile-language-dropdown button:last-child {
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+  }
+
+  .mobile-language-dropdown button:hover {
+    background-color: rgba(0, 65, 122, 0.1);
+  }
+
+  /* Add padding to body for top navbar instead of bottom */
+  body {
+    padding-top: 16vw !important; /* Changed from padding-bottom */
+    padding-bottom: 0 !important;
+  }
+
+  /* Hide the desktop navbar logo since mobile navbar is now at top */
+  .navbar-logo {
+    display: none !important;
+  }
+}
+
+/* Remove the duplicate mobile styles that might be conflicting */
+@media (max-width: 768px) {
+  .navbar-hamburger {
+    display: none !important; /* Hide hamburger completely */
+  }
+  
+  .navbar-menu {
+    display: none !important; /* Hide the old hamburger menu */
+  }
+}
+
 @media (min-width: 769px) {
   .navbar-menu .navbar-logo {
     display: none !important;
