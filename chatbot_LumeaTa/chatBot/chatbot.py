@@ -627,6 +627,7 @@ def planificare():
             log_message("ПОЛЬЗОВАТЕЛЬ", f"Ответ, связанный с регионом: {response}")
 
         preferinte["regiune"] = response
+        preferinte['regiune'] = response
     
     elif check_region(response) in ["IN PROGRES", "Inca nu e disponibila tara"] or check_region(response) == "NU E DISPONIBIL" :
             if language == "RO":

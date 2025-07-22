@@ -453,14 +453,13 @@ def filtreaza_tururi_dupa_durata(tururi_text, durata_max_text, language):
 #     "buget": "pana 200 euro",
 # }
 
-
 def create_preferinte_text(preferinte):
     preferinte_text = (
-        f"Regiune: {preferinte['regiune']}\n"
-        f"Anotimp: {preferinte['anotimp']}\n"
-        f"Durata maximă: {preferinte['durata_max']} zile\n"
-        f"Dificultate: {preferinte['dificultate']}\n"
-        f"Buget: {preferinte['buget']} euro\n"
+        f"Regiune: {preferinte.get('regiune', 'Nespecificată')}\n"
+        f"Anotimp: {preferinte.get('anotimp', 'Nespecificat')}\n"
+        f"Durata maximă: {preferinte.get('durata_max', 'Nespecificată')} zile\n"
+        f"Dificultate: {preferinte.get('dificultate', 'Nespecificată')}\n"
+        f"Buget: {preferinte.get('buget', 'Nespecificat')} euro\n"
     )
     return preferinte_text
         
@@ -684,7 +683,7 @@ def aplica_filtrele(tururi_text, preferinte , language):
             print("Нет предпочтения по длительности\n\n")
             not_preferinta += "Нет туров, соответствующих выбранной длительности,\n"
             counter -= 1
-
+ 
     tururi_formatate = []
     tururi_formatate_0 = []
     tururi_formatate.append(not_preferinta)
