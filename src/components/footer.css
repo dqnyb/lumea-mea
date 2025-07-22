@@ -57,6 +57,7 @@
   border-radius: 0.5vw;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 5vw;
 }
 
 .footer-top-button:hover {
