@@ -20,12 +20,16 @@ import day4Imagemob from "../assets/chinacalendar4mob.jpg";
 import day5Image from "../assets/chinacalendar5.jpg";
 import day6Image from "../assets/chinacalendar6.jpg";
 import day7Image from "../assets/chinacalendar7.jpg";
+import priceinfo1romobmob from "../assets/chinapriceinforo1mob.jpg"
 import priceinfo1ro from "../assets/chinapriceinforo1.jpg"
+import priceinfo2romobmob from "../assets/chinapriceinforo2mob.jpg"
 import priceinfo2ro from "../assets/chinapriceinforo2.jpg"
 import priceinfo3ro from "../assets/chinapriceinforo3.jpg"
 import priceinfo3romob from "../assets/chinapriceinforo3mob.jpg"
 import priceinfo1ru from "../assets/chinapriceinforu1.jpg"
+import priceinfo1rumob from "../assets/chinapriceinforu1mob.jpg"
 import priceinfo2ru from "../assets/chinapriceinforu2.jpg"
+import priceinfo2rumob from "../assets/chinapriceinforu2mob.jpg"
 import priceinfo3ru from "../assets/chinapriceinforu3.jpg"
 import priceinfo3rumob from "../assets/chinapriceinforu3mob.jpg"
 import Echpament from "../components/echipamnt"
@@ -104,10 +108,18 @@ const ChinaTripPage: React.FC<ChinaTripPageProps> = ({ currentLang, setCurrentLa
             <h1 className="trippage-price">{translations[currentLang].China.sectionPriceDescritpion}</h1>
             <ul className="trippage-info-list">
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo1rumob : priceinfo1romobmob)
+                    : (currentLang === 'ru' ? priceinfo1ru : priceinfo1ro)
+                } />
               </li>
                <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo2rumob : priceinfo2romobmob)
+                    : (currentLang === 'ru' ? priceinfo2ru : priceinfo2ro)
+                } />
               </li>
              <li className="trippage-info-list-item">
                 <img className="trippage-info-list-item-3"

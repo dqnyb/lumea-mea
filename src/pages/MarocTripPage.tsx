@@ -19,9 +19,13 @@ import day6Image from "../assets/MarocCalendar6.jpg";
 import day7Image from "../assets/MarocCalendar7.jpg";
 import day8Image from "../assets/MarocCalendar8.jpg";
 import priceinfo1ro from "../assets/pretinfoMaroc1.jpg"
+import priceinfo1romob from "../assets/pretinfoMaroc1mob.jpg"
 import priceinfo2ro from "../assets/pretinfoMaroc2.jpg"
+import priceinfo2romob from "../assets/pretinfoMaroc2mob.jpg"
 import priceinfo3ro from "../assets/pretinfoMaroc3.jpg"
+import priceinfo1rumob from "../assets/pretinfoMaroc1rumob.jpg"
 import priceinfo1ru from "../assets/pretinfoMaroc1ru.jpg"
+import priceinfo2rumob from "../assets/pretinfoMaroc2rumob.jpg"
 import priceinfo2ru from "../assets/pretinfoMaroc2ru.jpg"
 import priceinfo3ru from "../assets/pretinfoMaroc3ru.jpg"
 import priceinfo3rumob from "../assets/pretinfoMaroc3rumob.jpg"
@@ -109,10 +113,18 @@ const TripPage: React.FC<MarocTripPageProps> = ({ currentLang, setCurrentLang })
             <h1 className="trippage-price">{translations[currentLang].Maroc.sectionPriceDescritpion}</h1>
             <ul className="trippage-info-list">
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo1rumob : priceinfo1romob)
+                    : (currentLang === 'ru' ? priceinfo1ru : priceinfo1ro)
+                } />
               </li>
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo2rumob : priceinfo2romob)
+                    : (currentLang === 'ru' ? priceinfo2ru : priceinfo2ro)
+                } />
               </li>
               <li className="trippage-info-list-item">
                 <img className="trippage-info-list-item-3"

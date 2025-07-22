@@ -25,11 +25,15 @@ import allineedtoknoeimg5 from "../assets/marocalltoknow5.jpg"
 import blueline from "../assets/longblueline.svg"
 import Timer from "../components/timer"
 import santiagotimer from "../assets/santiagotimer.jpg"
+import priceinfo1romob from "../assets/priceonfosinagpor1mob.jpg"
 import priceinfo1ro from "../assets/priceonfosinagpor1.jpg"
+import priceinfo2rumob from "../assets/priceonfosinagpor2mob.jpg"
 import priceinfo2ru from "../assets/priceonfosinagpor2.jpg"
 import priceinfo3ro from "../assets/priceonfosinagpor3.jpg"
 import priceinfo3romob from "../assets/priceonfosinagpor3mob.jpg"
+import priceinfo2romob from "../assets/priceonfosinagpor2mob.jpg"
 import priceinfo2ro from "../assets/priceonfosinagpor2.jpg"
+import priceinfo1rumob from "../assets/priceonfosinagpor1mob.jpg"
 import priceinfo1ru from "../assets/priceonfosinagpor1.jpg"
 import priceinfo3ru from "../assets/priceonfosinagpor3.jpg"
 import priceinfo3rumob from "../assets/priceonfosinagpor3mob.jpg"
@@ -95,12 +99,20 @@ const SantiagoTripPage: React.FC = () => {
             <h1 className="trippage-price">{translations[currentLang].Santiago.sectionPriceDescritpion}</h1>
             <ul className="trippage-info-list">
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo1ru : priceinfo1ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo1rumob : priceinfo1romob)
+                    : (currentLang === 'ru' ? priceinfo1ru : priceinfo1ro)
+                } />
               </li>
               <li className="trippage-info-list-item">
-                <img src={currentLang === 'ru' ? priceinfo2ru : priceinfo2ro} />
+                <img src={
+                  window.innerWidth <= 768
+                    ? (currentLang === 'ru' ? priceinfo2rumob : priceinfo2romob)
+                    : (currentLang === 'ru' ? priceinfo2ru : priceinfo2ro)
+                } />
               </li>
-             <li className="trippage-info-list-item">
+              <li className="trippage-info-list-item">
                 <img className="trippage-info-list-item-3"
                   src={
                     window.innerWidth <= 768
